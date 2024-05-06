@@ -1,5 +1,5 @@
 # Coding conventions
-This document describes the standard that our code should be held up to during this project.
+This document describes the standard that our code should be held up to during this project. Nothing in this document is final, anything may be changed if the team agrees to it.
 
 ## Naming
 - Use meaningful names for all things (classes, variables, methods, filenames etc.), avoid abbreviations and ambiguity. Setters and getters should start with `set` and `get`, however for boolean types it should start with `is`. For example:
