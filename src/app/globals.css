@@ -1,0 +1,40 @@
+body{
+
+    font-family: Signika, serif;
+    color: #272A3D;
+}
+
+.navBar{
+    background-color: #272A3D;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding: 1%;
+
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.navMenu{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 25px;
+}
+
+.mainContent{
+    margin-left: 10%;
+
+}
+
+.textLogo{
+    font-size: larger;
+}
+
+.recentQuizzes{
+    display: flex;
+    gap: 5%;
+}
+
