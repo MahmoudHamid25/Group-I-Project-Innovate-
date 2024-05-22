@@ -1,9 +1,6 @@
 import Image from 'next/image'
-import {Main} from "next/document";
-import {Button} from "@nextui-org/button";
 
-
-function Login() {
+export function Login() {
     return (
         <div>
             <a href={""}>Log in</a>
@@ -11,7 +8,7 @@ function Login() {
     );
 }
 
-function SignUp() {
+export function SignUp() {
     return (
         <div>
             <a href={""}>Sign Up</a>
@@ -19,7 +16,7 @@ function SignUp() {
     );
 }
 
-function HamburgerMenu() {
+export function HamburgerMenu() {
     return (
         <a href={""}>
             <Image
@@ -32,7 +29,7 @@ function HamburgerMenu() {
     );
 }
 
-function NavBar() {
+export function NavBar() {
     return (
         <nav className={"navBar"}>
             <div className={"textLogo"}>
@@ -109,13 +106,13 @@ function MainContent() {
             <br/>
             <section style={{display: "flex", justifyContent: "space-between", marginRight: "33%", marginLeft: "23%"}}>
                 <button className={"indexButton"}>Log in</button>
-                <button className={"indexButton"}>Sign up</button>
+                <button className={"indexButton"}><a href={"/registration/page"}>Sign up</a></button>
             </section>
         </section>
     );
 }
 
-function Footer() {
+export function Footer() {
     return (
         <footer>
             <div className={"footerGrid"}>
@@ -143,12 +140,12 @@ function Footer() {
 export default function index() {
     return (
         <body>
+        <NavBar/>
         <main>
-            <NavBar/>
             <MainContent/>
             <br/>
-            <Footer/>
         </main>
+        <Footer/>
         </body>
     );
 }
