@@ -11,7 +11,6 @@ body{
     justify-content: space-between;
     color: white;
     padding: 1%;
-
 }
 
 a{
@@ -27,6 +26,7 @@ a{
 
 .mainContent{
     margin-left: 10%;
+    margin-right: 10%;
 }
 
 .textLogo{
@@ -35,7 +35,7 @@ a{
 
 .recentQuizzes{
     display: flex;
-    gap: 50px;
+    gap: 3em;
 }
 
 .indexButton{
@@ -61,4 +61,5 @@ footer{
 .registrationForm{
     margin-left: 33%;
     margin-right: 33%;
+    padding-bottom: 5em;
 }

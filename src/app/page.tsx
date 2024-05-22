@@ -33,7 +33,7 @@ export function NavBar() {
     return (
         <nav className={"navBar"}>
             <div className={"textLogo"}>
-                <a href={"index"}><strong>Study</strong>Hub</a>
+                <a href={"./"}><strong>Study</strong>Hub</a>
             </div>
             <nav className={"navMenu"}>
                 <Login/>
@@ -44,7 +44,7 @@ export function NavBar() {
     );
 }
 
-function RecentQuizzes() {
+export function RecentQuizzes() {
     return (
         <div className={"recentQuizzes"}>
             <a href={""}>
@@ -101,12 +101,10 @@ function MainContent() {
             <section>
                 <RecentQuizzes/>
             </section>
-            <br/>
-            <h1 style={{marginRight: "25%", marginLeft: "25%"}}>If you wish to explore more, join the community!</h1>
-            <br/>
+            <h1 style={{marginRight: "25%", marginLeft: "25%", padding: "2em"}}>If you wish to explore more, join the community!</h1>
             <section style={{display: "flex", justifyContent: "space-between", marginRight: "33%", marginLeft: "23%"}}>
                 <button className={"indexButton"}>Log in</button>
-                <button className={"indexButton"}><a href={"/registration/page"}>Sign up</a></button>
+                <button className={"indexButton"}><a href={"/registration/"}>Sign up</a></button>
             </section>
         </section>
     );
@@ -143,7 +141,6 @@ export default function index() {
         <NavBar/>
         <main>
             <MainContent/>
-            <br/>
         </main>
         <Footer/>
         </body>

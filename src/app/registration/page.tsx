@@ -4,7 +4,7 @@ function Main(){
     return(
       <div className={"registrationForm"}>
           <h1>Register</h1>
-          <p><hr/></p>
+          <hr/>
           <form>
               <p/><label htmlFor={"nickName"}>Nickname</label>
               <p/><input type={"text"} name={"nickName"}/>
@@ -15,6 +15,7 @@ function Main(){
               <p/><label htmlFor={"confirmPassword"}>Confirm password</label>
               <p/><input type={"password"} name={"confirmPassword"}/>
           </form>
+          <button className={"indexButton"}><a href={""}>Register</a></button>
       </div>
     );
 }
