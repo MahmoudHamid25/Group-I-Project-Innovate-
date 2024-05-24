@@ -11,7 +11,7 @@ export function Login() {
 export function SignUp() {
     return (
         <div>
-            <a href={""}>Sign Up</a>
+            <a href={"/registration/"}>Sign Up</a>
         </div>
     );
 }
