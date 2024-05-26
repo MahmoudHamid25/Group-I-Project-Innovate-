@@ -1,16 +1,7 @@
-import {Footer, NavBar} from "@/app/page";
-import UploadPrompt from "@/app/uploading/uploadPrompt";
-
-
+import UploadPrompt from "@/app/components/uploadPrompt";
 
 export default function Uploading(){
     return(
-        <body>
-            <NavBar/>
-            <main>
-                <UploadPrompt/>
-            </main>
-            <Footer/>
-        </body>
+        <UploadPrompt/>
     );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import {NavBar} from "@/app/components/navbar";
+import {Footer} from "@/app/components/footer";
 
 export const metadata: Metadata = {
   title: "StudyHub",
@@ -13,7 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+          <main>
+            <NavBar/>
+            <div>{children}</div>
+            <Footer/>
+          </main>
+      </body>
     </html>
   );
 }

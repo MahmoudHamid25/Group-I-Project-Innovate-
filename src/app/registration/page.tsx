@@ -1,4 +1,3 @@
-import {Footer, NavBar} from "@/app/page";
 
 function Main(){
     return(
@@ -22,13 +21,7 @@ function Main(){
 
 export default function Page() {
     return (
-        <body>
-        <NavBar />
-            <main>
-                <Main/>
-            </main>
-            <Footer />
-        </body>
+        <Main/>
     );
 }
 
