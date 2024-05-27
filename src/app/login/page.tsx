@@ -1,6 +1,9 @@
+import Image from 'next/image';
+
 function LoginForm() {
     return (
       <div className={"loginForm"}>
+        <Image src="/icon.svg" alt="StudyHub Logo" width={50} height={50} />
         <h1>Sign in to StudyHub</h1>
         <form>
           <p/><label htmlFor={"email"}>E-mail Address</label>
