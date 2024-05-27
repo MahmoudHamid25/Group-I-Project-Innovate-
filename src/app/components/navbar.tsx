@@ -1,4 +1,5 @@
 import Image from "next/image";
+import DropdownMenu from "@/app/components/dropdownmenu";
 
 export function Login() {
     return (
@@ -16,18 +17,6 @@ export function SignUp() {
     );
 }
 
-export function HamburgerMenu() {
-    return (
-        <a href={""}>
-            <Image
-                src="/img/menulines.svg"
-                alt="Hamburger Menu"
-                height={18}
-                width={32}
-            />
-        </a>
-    );
-}
 
 export function NavBar() {
     return (
@@ -38,7 +27,7 @@ export function NavBar() {
             <nav className={"navMenu"}>
                 <Login/>
                 <SignUp/>
-                <HamburgerMenu/>
+                <DropdownMenu/>
             </nav>
         </nav>
     );
