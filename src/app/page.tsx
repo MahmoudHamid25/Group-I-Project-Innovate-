@@ -16,7 +16,7 @@ function MainContent() {
             </section>
             <h1 style={{marginRight: "25%", marginLeft: "25%", padding: "2em"}}>If you wish to explore more, join the community!</h1>
             <section style={{display: "flex", justifyContent: "space-between", marginRight: "33%", marginLeft: "23%"}}>
-                <button className={"indexButton"}>Log in</button>
+                <button className={"indexButton"}><a href={"/login/"}>Log in</a></button>
                 <button className={"indexButton"}><a href={"/registration/"}>Sign up</a></button>
             </section>
         </section>
