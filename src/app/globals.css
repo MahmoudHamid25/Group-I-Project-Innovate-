@@ -1,65 +1,159 @@
-body{
-    margin: 0 auto;
-    padding: 0;
-    font-family: Signika, serif;
-    color: #272A3D;
+html,
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: Signika, serif;
+	color: #272a3d;
 }
 
-.navBar{
-    background-color: #272A3D;
-    display: flex;
-    justify-content: space-between;
-    color: white;
-    padding: 1%;
+.navBar {
+	background-color: #272a3d;
+	display: flex;
+	justify-content: space-between;
+	color: white;
+	padding: 1%;
 }
 
-a{
-    color: white;
-    text-decoration: none;
+a {
+	color: white;
+	text-decoration: none;
 }
 
-.navMenu{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 25px;
+.navMenu {
+	display: flex;
+	justify-content: space-evenly;
+	gap: 25px;
 }
 
-.mainContent{
-    margin-left: 10%;
-    margin-right: 10%;
+.mainContent {
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
-.textLogo{
-    font-size: larger;
+.textLogo {
+	font-size: larger;
 }
 
-.recentQuizzes{
-    display: flex;
-    gap: 3em;
+.recentQuizzes {
+	display: flex;
+	gap: 3em;
 }
 
-.indexButton{
-    background-color: #272A3D;
-    color: white;
-    font-size: 20px;
-    padding: 15px 32px;
-    border-radius: 10rem;
+.indexButton {
+	background-color: #272a3d;
+	color: white;
+	font-size: 20px;
+	padding: 15px 32px;
+	border-radius: 10rem;
 }
 
-footer{
-    background-color: #272A3D;
-    color: white;
-    padding: 1rem;
+footer {
+	background-color: #272a3d;
+	color: white;
+	padding: 1rem;
 }
 
-.footerGrid{
-    display: grid;
-    grid-template-columns: 30em 30em;
-    gap: 10rem;
+.footerGrid {
+	display: grid;
+	grid-template-columns: 30em 30em;
+	gap: 10rem;
 }
 
-.registrationForm{
-    margin-left: 33%;
-    margin-right: 33%;
-    padding-bottom: 5em;
+.registrationForm {
+	margin-left: 33%;
+	margin-right: 33%;
+	padding-bottom: 5em;
+}
+/* style for Log in form */
+.loginForm {
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.loginForm .header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.loginForm .header h1 {
+	margin-left: 10px;
+	font-size: 24px;
+}
+
+.loginForm label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.loginForm input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.indexButton {
+	display: inline-block;
+	background-color: #007bff;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.indexButton a {
+	color: white;
+	text-decoration: none;
+}
+
+.forgotPassword {
+	margin-top: 10px;
+	text-align: right;
+}
+
+.forgotPassword a {
+	color: #007bff;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.forgotPassword a:hover {
+	text-decoration: underline;
+}
+
+.wrapper {
+	max-width: 1200px;
+	margin: 50px auto;
+}
+
+.input_wrapper label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
+.input_wrapper input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.button {
+	border-radius: 100px;
+	font-weight: bold;
+	background: #b4ccee;
+	font-size: 20px;
+	padding: 10px 20px;
 }
