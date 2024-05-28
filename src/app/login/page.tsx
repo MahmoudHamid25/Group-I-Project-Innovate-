@@ -17,5 +17,9 @@ function LoginForm() {
     );
   }
   
-  export default LoginForm;
+  export default function Page() {
+    return (
+        <LoginForm />
+    );
+}
 
