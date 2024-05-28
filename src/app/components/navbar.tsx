@@ -4,7 +4,7 @@ import DropdownMenu from "@/app/components/dropdownmenu";
 export function Login() {
     return (
         <div>
-            <a href={""}>Log in</a>
+            <a href={"/login/"}>Log in</a>
         </div>
     );
 }
