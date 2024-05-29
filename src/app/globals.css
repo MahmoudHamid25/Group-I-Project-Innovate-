@@ -1,303 +1,225 @@
-@font-face {
-    font-family: Signika;
-    src: local("../../public/fonts");
+html,
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: Signika, serif;
+	color: #272a3d;
 }
 
-html,body{
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 0;
-    font-family: Signika, serif;
-    color: #272A3D;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
+.navBar {
+	background-color: #272a3d;
+	display: flex;
+	justify-content: space-between;
+	color: white;
+	padding: 1%;
 }
 
-.navBar{
-    background-color: #272A3D;
-    display: flex;
-    justify-content: space-between;
-    color: white;
-    padding: 1.5vh;
-    font-size: 20pt;
+a {
+	color: white;
+	text-decoration: none;
 }
 
-a{
-    color: white;
-    text-decoration: none;
-    font-family: Signika, serif;
+.navMenu {
+	display: flex;
+	justify-content: space-evenly;
+	gap: 25px;
 }
 
-.coloredLine{
-    width: 100%;
-    height: 0.0625rem;
-    background: #272A3D;
+.mainContent {
+	margin-left: 10%;
+	margin-right: 10%;
 }
 
-.navMenu{
-    display: flex;
-    justify-content: space-evenly;
-    gap: 1.5rem;
-}
-.dropPosition{
+.textLogo {
+	font-size: larger;
 }
 
-.dropdownMenu{
-    background-color: #434867;
-    position: absolute;
-    block-size: auto;
-    border-radius: 15px 0px 15px 15px;
-    padding: 1vh;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 1rem;
-    right: 3%;
+.recentQuizzes {
+	display: flex;
+	gap: 3em;
 }
 
-.mainContent{
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 5rem;
+.indexButton {
+	background-color: #272a3d;
+	color: white;
+	font-size: 20px;
+	padding: 15px 32px;
+	border-radius: 10rem;
 }
 
-.mainText h1{
-    font-size: 46px;
-}
-.mainText p{
-    font-size: 20px;
-    padding-right: 20%;
-}
-.createQuizzP{
-    font-size: 20px;
+footer {
+	background-color: #272a3d;
+	color: white;
+	padding: 1rem;
 }
 
-.textLogo{
-    font-size: larger;
+.footerGrid {
+	display: grid;
+	grid-template-columns: 30em 30em;
+	gap: 10rem;
 }
 
-.recentQuizzes{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    gap: 1rem;
+.registrationForm {
+	margin-left: 33%;
+	margin-right: 33%;
+	padding-bottom: 5em;
+}
+/* style for Log in form */
+.loginForm {
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
-.quizzText{
-    font-family: "Signika Light", serif;
-    font-size: 40px;
+.loginForm .header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
-.signinSignout {
-    display: flex;
-    justify-content: center;
-    gap: 12%;
+.loginForm .header h1 {
+	margin-left: 10px;
+	font-size: 24px;
 }
 
-.sideText h1 {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
+.loginForm label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
-.indexButtonHomePage{
-    background-color: #272A3D;
-    color: white;
-    font-size: 32px;
-    padding: 20px 50px;
-    border-radius: 10rem;
+.loginForm input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
-.indexButton{
-    background-color: #272A3D;
-    color: white;
-    font-size: 32px;
-    padding: 15px 40px;
-    border-radius: 10rem;
+.indexButton {
+	display: inline-block;
+	background-color: #007bff;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
 }
 
-.buttonMain{
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
+.indexButton a {
+	color: white;
+	text-decoration: none;
 }
 
-main {
-    padding: 2dvw;
-    flex-grow: 1;
+.forgotPassword {
+	margin-top: 10px;
+	text-align: right;
 }
 
-footer{
-    background-color: #272A3D;
-    color: white;
-    padding: 1rem;
+.forgotPassword a {
+	color: #007bff;
+	text-decoration: none;
+	font-size: 14px;
 }
 
-.footerGrid{
-    display: flex;
-    gap: 10rem;
-}
-
-form{
-    padding-bottom: 2rem;
+.forgotPassword a:hover {
+	text-decoration: underline;
 }
 
 .wrapper {
-    max-width: 1200px;
-    margin: 50px auto;
+	max-width: 1200px;
+	margin: 50px auto;
 }
 
 .input_wrapper label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 20px;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+	font-size: 20px;
 }
 
 .input_wrapper input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.button {
+	border-radius: 100px;
+	font-weight: bold;
+	background: #b4ccee;
+	font-size: 20px;
+	padding: 10px 20px;
+}
+/* style for Log in form */
+.loginForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .loginForm .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .loginForm .header h1 {
+    margin-left: 10px;
+    font-size: 24px;
+  }
+  
+  .loginForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .loginForm input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.button {
-    border-radius: 100px;
-    font-weight: bold;
-    background: #b4ccee;
-    font-size: 20px;
+  }
+  
+  .indexButton {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
     padding: 10px 20px;
-}
-
-/*-------------Style for Register Form-----------*/
-.registrationForm{
-    padding-top: 14vh;
-    max-width: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.containerFormRegister{
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 3vh;
-    width: 40vh;
-}
-
-.registrationForm h1 {
-    font-size: 46px;
-    font-family: Signika, serif;
-}
-
-.registrationForm label{
-    display: block;
-    font-weight: bold;
-    font-size: 36px;
-    font-family: "Signika Light", serif;
-}
-
-.registrationForm input{
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-/*---------------------------- Style For Login Form-----------------------*/
-.loginForm {
-    padding-top: 14vh;
-    max-width: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.containerForm{
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 3vh;
-}
-
-.centeringElementsLoginForm{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.loginForm .header {
-    display: flex;
-    align-items: center;
-}
-
-.loginForm h1 {
-    font-size: 46px;
-    font-family: Signika, serif;
-}
-
-.loginForm label {
-    display: block;
-    font-weight: bold;
-    font-size: 36px;
-    font-family: "Signika Light", serif;
-}
-
-.loginForm input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.indexButtonLogin {
-    display: flex;
-    background-color: #B4CDED;
-    padding: 10px 40px;
     border: none;
-    border-radius: 50px;
+    border-radius: 4px;
     text-align: center;
     text-decoration: none;
-}
-
-.indexButtonLogin a {
-    color: #272A3D;
+    cursor: pointer;
+  }
+  
+  .indexButton a {
+    color: white;
     text-decoration: none;
-    font-family: "Signika Light", serif;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.forgotPassword {
+  }
+  
+  .forgotPassword {
+    margin-top: 10px;
     text-align: right;
-}
-
-.forgotpasswordText{
+  }
+  
+  .forgotPassword a {
     color: #007bff;
     text-decoration: none;
     font-size: 14px;
-}
-
-.forgotPassword a:hover {
+  }
+  
+  .forgotPassword a:hover {
     text-decoration: underline;
-}
-
-/*--------------------Style for Upload Page-----------------*/
-
-.docButton button{
-    border: none;
-    padding: 1rem;
-}
-
-.textButton button{
-    border: none;
-    padding: 1rem;
-}
-
-/*WIP since the whole page is component*/
+  }
+  
