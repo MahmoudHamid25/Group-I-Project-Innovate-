@@ -1,0 +1,180 @@
+Index: src/app/components/navbar.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Image from \"next/image\";\r\nimport DropdownMenu from \"@/app/components/dropdownmenu\";\r\n\r\nexport function Login() {\r\n    return (\r\n        <div>\r\n            <a href={\"\"}>Log in</a>\r\n        </div>\r\n    );\r\n}\r\n\r\nexport function SignUp() {\r\n    return (\r\n        <div>\r\n            <a href={\"/registration/\"}>Sign Up</a>\r\n        </div>\r\n    );\r\n}\r\n\r\n\r\nexport function NavBar() {\r\n    return (\r\n        <nav className={\"navBar\"}>\r\n            <div className={\"textLogo\"}>\r\n                <a href={\"./\"}><strong>Study</strong>Hub</a>\r\n            </div>\r\n            <nav className={\"navMenu\"}>\r\n                <Login/>\r\n                <SignUp/>\r\n                <DropdownMenu/>\r\n            </nav>\r\n        </nav>\r\n    );\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/components/navbar.tsx b/src/app/components/navbar.tsx
+--- a/src/app/components/navbar.tsx	
++++ b/src/app/components/navbar.tsx	
+@@ -4,7 +4,7 @@
+ export function Login() {
+     return (
+         <div>
+-            <a href={""}>Log in</a>
++            <a href={"/login/"}>Log in</a>
+         </div>
+     );
+ }
+@@ -29,6 +29,7 @@
+                 <SignUp/>
+                 <DropdownMenu/>
+             </nav>
++
+         </nav>
+     );
+ }
+\ No newline at end of file
+Index: src/app/layout.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import type { Metadata } from \"next\";\r\nimport \"./globals.css\";\r\nimport {NavBar} from \"@/app/components/navbar\";\r\nimport {Footer} from \"@/app/components/footer\";\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"StudyHub\",\r\n  description: \"\",\r\n};\r\n\r\nexport default function RootLayout({\r\n  children,\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return (\r\n    <html lang=\"en\">\r\n      <body>\r\n          <main>\r\n            <NavBar/>\r\n            <div>{children}</div>\r\n            <Footer/>\r\n          </main>\r\n      </body>\r\n    </html>\r\n  );\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+--- a/src/app/layout.tsx	
++++ b/src/app/layout.tsx	
+@@ -16,11 +16,13 @@
+   return (
+     <html lang="en">
+       <body>
+-          <main>
+-            <NavBar/>
++        <NavBar/>
++          <main>
++
+             <div>{children}</div>
+-            <Footer/>
++
+           </main>
++        <Footer/>
+       </body>
+     </html>
+   );
+Index: src/app/globals.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>body{\r\n    margin: 0 auto;\r\n    padding: 0;\r\n    font-family: Signika, serif;\r\n    color: #272A3D;\r\n}\r\n\r\n.navBar{\r\n    background-color: #272A3D;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    color: white;\r\n    padding: 1%;\r\n}\r\n\r\na{\r\n    color: white;\r\n    text-decoration: none;\r\n}\r\n\r\n.navMenu{\r\n    display: flex;\r\n    justify-content: space-evenly;\r\n    gap: 25px;\r\n}\r\n\r\n.mainContent{\r\n    margin-left: 10%;\r\n    margin-right: 10%;\r\n}\r\n\r\n.textLogo{\r\n    font-size: larger;\r\n}\r\n\r\n.recentQuizzes{\r\n    display: flex;\r\n    gap: 3em;\r\n}\r\n\r\n.indexButton{\r\n    background-color: #272A3D;\r\n    color: white;\r\n    font-size: 20px;\r\n    padding: 15px 32px;\r\n    border-radius: 10rem;\r\n}\r\n\r\nfooter{\r\n    background-color: #272A3D;\r\n    color: white;\r\n    padding: 1rem;\r\n}\r\n\r\n.footerGrid{\r\n    display: grid;\r\n    grid-template-columns: 30em 30em;\r\n    gap: 10rem;\r\n}\r\n\r\n.registrationForm{\r\n    margin-left: 33%;\r\n    margin-right: 33%;\r\n    padding-bottom: 5em;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/globals.css b/src/app/globals.css
+--- a/src/app/globals.css	
++++ b/src/app/globals.css	
+@@ -1,8 +1,13 @@
+ body{
++    min-height: 100vh;
+     margin: 0 auto;
+     padding: 0;
+     font-family: Signika, serif;
+     color: #272A3D;
++    display: flex;
++    flex-flow: column nowrap;
++    justify-content: space-between;
++
+ }
+ 
+ .navBar{
+@@ -10,23 +15,38 @@
+     display: flex;
+     justify-content: space-between;
+     color: white;
+-    padding: 1%;
++    padding: 1.5vh;
+ }
+ 
+ a{
+     color: white;
+     text-decoration: none;
++    font-family: Signika, serif;
+ }
+ 
+ .navMenu{
+     display: flex;
+     justify-content: space-evenly;
+-    gap: 25px;
++    gap: 1.5rem;
++}
++.dropPosition{
++}
++
++.dropdownMenu{
++    background-color: #434867;
++    position: absolute;
++    block-size: auto;
++    border-radius: 15px 0px 15px 15px;
++    padding: 1vh;
++    display: flex;
++    flex-flow: column nowrap;
++    gap: 0.50rem;
++    right: 3%;
+ }
+ 
+ .mainContent{
+-    margin-left: 10%;
+-    margin-right: 10%;
++    display: flex;
++    flex-flow: column nowrap;
+ }
+ 
+ .textLogo{
+@@ -35,7 +55,9 @@
+ 
+ .recentQuizzes{
+     display: flex;
+-    gap: 3em;
++    flex-flow: row wrap;
++    justify-content: space-evenly;
++    gap: 1rem;
+ }
+ 
+ .indexButton{
+@@ -58,8 +80,13 @@
+     gap: 10rem;
+ }
+ 
++form{
++    padding-bottom: 2rem;
++}
++
+ .registrationForm{
+     margin-left: 33%;
+     margin-right: 33%;
+-    padding-bottom: 5em;
++    padding-bottom: 2em;
+ }
++
+Index: src/app/components/dropdownmenu.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>'use client'\r\n\r\nimport {useState} from \"react\";\r\nimport Image from \"next/image\";\r\n\r\nexport default function DropdownMenu() {\r\n    const [dropDown, setDropDown] = useState(false);\r\n\r\n    function HandleButtonClick() {\r\n        if (dropDown) {\r\n            setDropDown(false)\r\n        } else {\r\n            setDropDown(true)\r\n        }\r\n\r\n    }\r\n\r\n    if (dropDown) {\r\n        return (\r\n            <div>\r\n                <Image\r\n                    src=\"/img/menulines.svg\"\r\n                    alt=\"Hamburger Menu\"\r\n                    height={18}\r\n                    width={32}\r\n                    onClick={HandleButtonClick}\r\n                />\r\n                <div>\r\n                    <p>something</p>\r\n                </div>\r\n            </div>\r\n        );\r\n    } else return (\r\n        <Image\r\n            src=\"/img/menulines.svg\"\r\n            alt=\"Hamburger Menu\"\r\n            height={18}\r\n            width={32}\r\n            onClick={HandleButtonClick}\r\n        />\r\n    )\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/components/dropdownmenu.tsx b/src/app/components/dropdownmenu.tsx
+--- a/src/app/components/dropdownmenu.tsx	
++++ b/src/app/components/dropdownmenu.tsx	
+@@ -17,7 +17,7 @@
+ 
+     if (dropDown) {
+         return (
+-            <div>
++            <div className={"dropPosition"}>
+                 <Image
+                     src="/img/menulines.svg"
+                     alt="Hamburger Menu"
+@@ -25,8 +25,10 @@
+                     width={32}
+                     onClick={HandleButtonClick}
+                 />
+-                <div>
+-                    <p>something</p>
++                <div className={"dropdownMenu"}>
++                    <a href={"./"}>Home</a>
++                    <a href={"/main/"}>After_Logging_in</a>
++                    <a href={"/uploading/"}>Prototype</a>
+                 </div>
+             </div>
+         );

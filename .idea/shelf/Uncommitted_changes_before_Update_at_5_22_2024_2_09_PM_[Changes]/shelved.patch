@@ -1,0 +1,58 @@
+Index: src/app/page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Image from 'next/image'\r\nimport {Main} from \"next/document\";\r\nimport {Button} from \"@nextui-org/button\";\r\n\r\n\r\nfunction Login() {\r\n    return (\r\n        <div>\r\n            <a href={\"\"}>Log in</a>\r\n        </div>\r\n    );\r\n}\r\n\r\nfunction SignUp() {\r\n    return (\r\n        <div>\r\n            <a href={\"\"}>Sign Up</a>\r\n        </div>\r\n    );\r\n}\r\n\r\nfunction HamburgerMenu() {\r\n    return (\r\n        <a href={\"\"}>\r\n            <Image\r\n                src=\"/img/menulines.svg\"\r\n                alt=\"Hamburger Menu\"\r\n                height={18}\r\n                width={32}\r\n            />\r\n        </a>\r\n    );\r\n}\r\n\r\nfunction NavBar() {\r\n    return (\r\n        <nav className={\"navBar\"}>\r\n            <div className={\"textLogo\"}>\r\n                <a href={\"index\"}><strong>Study</strong>Hub</a>\r\n            </div>\r\n            <nav className={\"navMenu\"}>\r\n                <Login/>\r\n                <SignUp/>\r\n                <HamburgerMenu/>\r\n            </nav>\r\n        </nav>\r\n    );\r\n}\r\n\r\nfunction RecentQuizzes() {\r\n    return (\r\n        <div className={\"recentQuizzes\"}>\r\n            <a href={\"\"}>\r\n                <Image\r\n                    src=\"/img/49aec7c1954415a867cb8ad4685b64de.png\"\r\n                    alt=\"Quiz image\"\r\n                    height={180}\r\n                    width={276}\r\n                    style={{border: \" 2px solid black\"}}\r\n                />\r\n            </a>\r\n            <a href={\"\"}>\r\n                <Image\r\n                    src=\"/img/63c069664c66386e8b444d2aca2acd64.png\"\r\n                    alt=\"Quiz image\"\r\n                    height={180}\r\n                    width={276}\r\n                    style={{border: \" 2px solid black\"}}\r\n                />\r\n            </a>\r\n            <a href={\"\"}>\r\n                <Image\r\n                    src=\"/img/a0d2240586b0f4fe12cca2c971d68e8d.png\"\r\n                    alt=\"Quiz image\"\r\n                    height={180}\r\n                    width={276}\r\n                    style={{border: \" 2px solid black\"}}\r\n                />\r\n            </a>\r\n            <a href={\"\"}>\r\n                <Image\r\n                    src=\"/img/fc0a933cf1892fec611c772f32fb332d.png\"\r\n                    alt=\"Quiz image\"\r\n                    height={180}\r\n                    width={276}\r\n                    style={{border: \" 2px solid black\"}}\r\n                />\r\n            </a>\r\n        </div>\r\n    );\r\n}\r\n\r\nfunction MainContent() {\r\n    return (\r\n        <section className={\"mainContent\"}>\r\n            <h1>This is <strong>Study</strong>Hub</h1>\r\n            <p style={{marginRight: '33%'}}>\r\n                Welcome to StudyHub, your personalised exam preparation partner. Using advanced AI, we transform your\r\n                study materials into custom mock exams, providing immediate feedback and tracking your progress. Engage\r\n                with interactive features like leaderboards and flashcards, and connect with peers for a collaborative\r\n                learning experience. StudyHub – tailored learning for your success.\r\n            </p>\r\n            <h1> Here are some Quizzes made with the use of AI for you to try out!</h1>\r\n            <section>\r\n                <RecentQuizzes/>\r\n            </section>\r\n            <br/>\r\n            <h1 style={{marginRight: \"25%\", marginLeft: \"25%\"}}>If you wish to explore more, join the community!</h1>\r\n            <br/>\r\n            <section style={{display: \"flex\", justifyContent: \"space-between\", marginRight: \"33%\", marginLeft: \"23%\"}}>\r\n                <button className={\"indexButton\"}>Log in</button>\r\n                <button className={\"indexButton\"}>Sign up</button>\r\n            </section>\r\n        </section>\r\n    );\r\n}\r\n\r\nfunction Footer() {\r\n    return (\r\n        <footer>\r\n            <div className={\"footerGrid\"}>\r\n                <div>\r\n                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat elit in quam scelerisque\r\n                        tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut interdum rhoncus ligula,\r\n                        et iaculis tellus congue quis. Suspendisse potenti. Aliquam tristique eros a leo dapibus\r\n                        tincidunt. Sed sed turpis ipsum. Mauris pharetra lobortis ex, quis tincidunt tellus egestas\r\n                        vel.</p>\r\n                </div>\r\n                <div>\r\n                    <p>\r\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat elit in quam scelerisque\r\n                        tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut interdum rhoncus ligula,\r\n                        et iaculis tellus congue quis. Suspendisse potenti. Aliquam tristique eros a leo dapibus\r\n                        tincidunt. Sed sed turpis ipsum. Mauris pharetra lobortis ex, quis tincidunt tellus egestas vel.\r\n                    </p>\r\n                </div>\r\n            </div>\r\n        </footer>\r\n\r\n    );\r\n}\r\n\r\nexport default function index() {\r\n    return (\r\n        <body>\r\n        <main>\r\n            <NavBar/>\r\n            <MainContent/>\r\n            <br/>\r\n            <Footer/>\r\n        </main>\r\n        </body>\r\n    );\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+--- a/src/app/page.tsx	(revision 1ccddf61adc46234ac7659ce095b78ab754c82df)
++++ b/src/app/page.tsx	(date 1716377189728)
+@@ -1,6 +1,7 @@
+ import Image from 'next/image'
+ import {Main} from "next/document";
+ import {Button} from "@nextui-org/button";
++import Link from "next/link";
+ 
+ 
+ function Login() {
+@@ -108,8 +109,8 @@
+             <h1 style={{marginRight: "25%", marginLeft: "25%"}}>If you wish to explore more, join the community!</h1>
+             <br/>
+             <section style={{display: "flex", justifyContent: "space-between", marginRight: "33%", marginLeft: "23%"}}>
+-                <button className={"indexButton"}>Log in</button>
+-                <button className={"indexButton"}>Sign up</button>
++                <button className={"indexButton"} >Log in</button>
++                <Link href={"pages/registration/registration.tsx"} passHref ><button className={"indexButton"}>Sign up</button></Link>
+             </section>
+         </section>
+     );
+Index: src/app/layout.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import type { Metadata } from \"next\";\r\nimport { Inter } from \"next/font/google\";\r\nimport \"./globals.css\";\r\n\r\nconst inter = Inter({ subsets: [\"latin\"] });\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"StudyHub\",\r\n  description: \"\",\r\n};\r\n\r\nexport default function RootLayout({\r\n  children,\r\n}: Readonly<{\r\n  children: React.ReactNode;\r\n}>) {\r\n  return (\r\n    <html lang=\"en\">\r\n      <body className={inter.className}>{children}</body>\r\n    </html>\r\n  );\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+--- a/src/app/layout.tsx	(revision 1ccddf61adc46234ac7659ce095b78ab754c82df)
++++ b/src/app/layout.tsx	(date 1716375204012)
+@@ -1,9 +1,6 @@
+ import type { Metadata } from "next";
+-import { Inter } from "next/font/google";
+ import "./globals.css";
+ 
+-const inter = Inter({ subsets: ["latin"] });
+-
+ export const metadata: Metadata = {
+   title: "StudyHub",
+   description: "",
+@@ -16,7 +13,7 @@
+ }>) {
+   return (
+     <html lang="en">
+-      <body className={inter.className}>{children}</body>
++      <body>{children}</body>
+     </html>
+   );
+ }
