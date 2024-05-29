@@ -53,7 +53,7 @@ export default function UploadPrompt() {
                     <button onClick={documentClick}>Document</button>
                     </div>
                     <div className={"textButton"}>
-                    <button onClick={textClick}>Text</button>
+                    <button onClick={textClick}>Text Prompt</button>
                     </div>
                     <form encType={"multipart/form-data"} action={""} method={"Post"}>
                         <input type={"file"} name={"documentData"}/>

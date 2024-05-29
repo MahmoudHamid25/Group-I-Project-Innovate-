@@ -70,6 +70,7 @@ a{
 }
 .createQuizzP{
     font-size: 20px;
+    text-align: center;
 }
 
 .textLogo{
@@ -148,8 +149,9 @@ form{
 
 /*-------------Style for Register Form-----------*/
 .registrationForm{
-    padding-top: 14vh;
-    max-width: 100vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    max-width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -185,8 +187,9 @@ form{
 
 /*---------------------------- Style For Login Form-----------------------*/
 .loginForm {
-    padding-top: 14vh;
-    max-width: 100vh;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    max-width: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
