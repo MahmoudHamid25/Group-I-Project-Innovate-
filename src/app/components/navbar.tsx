@@ -1,5 +1,4 @@
-import Image from "next/image";
-import DropdownMenu from "@/app/components/dropdownmenu";
+import AppContainer from '@/app/components/appcontainer';
 
 export function Login() {
     return (
@@ -24,11 +23,12 @@ export function NavBar() {
             <div className={"textLogo"}>
                 <a href={"./"}><strong>Study</strong>Hub</a>
             </div>
-            <nav className={"navMenu"}>
+            <div className={"navMenu"}>
                 <Login/>
                 <SignUp/>
-                <DropdownMenu/>
-            </nav>
+                <AppContainer/>
+            </div>
         </nav>
+
     );
 }

@@ -49,17 +49,21 @@ export default function UploadPrompt() {
         return (
             <div>
                 <div>
+                    <div className={"docButton"}>
                     <button onClick={documentClick}>Document</button>
+                    </div>
+                    <div className={"textButton"}>
                     <button onClick={textClick}>Text</button>
+                    </div>
                     <form encType={"multipart/form-data"} action={""} method={"Post"}>
                         <input type={"file"} name={"documentData"}/>
                         <label htmlFor={"documentData"}>Acceptable doc types: .pdf, .doc, .txt</label>
-                        <hr/>
+                        <div className="coloredLine"></div>
                         <p>Select which chapters you would like to be generated into questions:</p>
                         <input type={""}/>
                         <input type={""}/> {/*find a way to create a list of the chapters*/}
                         <p>Ex: chapter title/page number</p>
-                        <hr/>
+                        <div className="coloredLine"></div>
                         <p>Select other chapters (optional): </p>
                         <button></button>
                         <button></button>

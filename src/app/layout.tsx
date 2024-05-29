@@ -16,11 +16,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <NavBar/>
           <main>
-            <NavBar/>
+
             <div>{children}</div>
-            <Footer/>
+
           </main>
+        <Footer/>
       </body>
     </html>
   );
