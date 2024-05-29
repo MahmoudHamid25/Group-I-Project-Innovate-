@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 export default function Profile() {
-	function submitHandler(event: any) {
+	async function submitHandler(event: any) {
 		event.preventDefault()
 
 		const email = event.target.email.value
@@ -11,22 +9,35 @@ export default function Profile() {
 		const confirm_password = event.target.confirm_password.value
 
 		if (password !== confirm_password) {
-			alert('Passwords do not match')
+			console.log('Passwords do not match')
+			return
+		}
+
+		if (password.length < 8) {
+			console.log('Password must be at least 8 characters long')
+			return
+		}
+
+		if (!email.includes('@') || !email.includes('.')) {
+			console.log('Invalid email address')
+			return
+		}
+
+		const res = await fetch('/api/users/update', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		})
+
+		if (res.status !== 200) {
+			console.log('Error updating password')
 		}
 	}
-
-	const [data, setData] = useState<string[]>([])
-
-	useEffect(() => {
-		async function fetchData() {
-			const res = await fetch('/api/users')
-			const result = await res.json()
-			setData(result)
-		}
-		fetchData()
-	}, [])
-
-	// data.sort((a, b) => a.score - b.score)
 
 	return (
 		<div className='wrapper'>
@@ -38,11 +49,11 @@ export default function Profile() {
 					<input type={'email'} name={'email'} />
 				</p>
 				<p className='input_wrapper'>
-					<label htmlFor={'password'}>Password</label>
+					<label htmlFor={'password'}>New Password</label>
 					<input type={'password'} name={'password'} />
 				</p>
 				<p className='input_wrapper'>
-					<label htmlFor={'confirm_password'}>Confirm Password</label>
+					<label htmlFor={'confirm_password'}>Confirm New Password</label>
 					<input type={'password'} name={'confirm_password'} />
 				</p>
 				<button className={'button'}>Confirm Changes</button>

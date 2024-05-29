@@ -2,12 +2,13 @@ import pool from '@/utils/db'
 
 export async function POST(request: Request) {
 	try {
+		const { email, password } = await request.json()
 		await pool.execute('UPDATE Users SET password = ? WHERE email = ?', [
-			request.body!.password,
-			request.body!.email,
+			password,
+			email,
 		])
-		Response.json({ status: 200 })
+		return Response.json({ status: 200 })
 	} catch (error: any) {
-		Response.json({ error: error.message }, { status: 500 })
+		return Response.json({ error: error.message }, { status: 500 })
 	}
 }
