@@ -3,7 +3,7 @@
     src: local("../../public/fonts");
 }
 
-body{
+html,body{
     min-height: 100vh;
     margin: 0 auto;
     padding: 0;
@@ -142,6 +142,34 @@ footer{
 
 form{
     padding-bottom: 2rem;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.input_wrapper label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.input_wrapper input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    border-radius: 100px;
+    font-weight: bold;
+    background: #b4ccee;
+    font-size: 20px;
+    padding: 10px 20px;
 }
 
 /*-------------Style for Register Form-----------*/
