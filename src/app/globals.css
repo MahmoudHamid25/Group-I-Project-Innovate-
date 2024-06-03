@@ -1,8 +1,24 @@
+/*----------FONTS--------*/
 @font-face {
-    font-family: "Signika Semibold Black";
-    src: local("../../public/fonts");
+    font-family: "Signika-SemiBold";
+    src: url('../../public/fonts/Signika-SemiBold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Signika-Light';
+    src: url('../../public/fonts/Signika-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Signika-Medium';
+    src: url('../../public/fonts/Signika-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Signika';
+    src: url('../../public/fonts/Signika-Regular.ttf') format('truetype');
+}
+/*----------FONTS--------*/
 html,body{
     min-height: 100vh;
     margin: 0 auto;
@@ -39,8 +55,6 @@ a{
     display: flex;
     justify-content: space-evenly;
     gap: 1.5rem;
-}
-.dropPosition{
 }
 
 .dropdownMenu{
@@ -85,7 +99,7 @@ a{
 }
 
 .quizzText{
-    font-family: "Signika Light", serif;
+    font-family: Signika-Light, serif;
     font-size: 40px;
 }
 
@@ -174,7 +188,7 @@ form{
     display: block;
     font-weight: bold;
     font-size: 36px;
-    font-family: "Signika Light", serif;
+    font-family: Signika-Light, serif;
 }
 
 .registrationForm input{
@@ -222,7 +236,7 @@ form{
     display: block;
     font-weight: bold;
     font-size: 36px;
-    font-family: "Signika Light", serif;
+    font-family: Signika-Light, serif;
 }
 
 .loginForm input {
@@ -247,7 +261,7 @@ form{
 .indexButtonLogin a {
     color: #272A3D;
     text-decoration: none;
-    font-family: "Signika Light", serif;
+    font-family: Signika-Light, serif;
     font-size: 32px;
     font-weight: bold;
 }
