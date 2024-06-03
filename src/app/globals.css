@@ -293,6 +293,12 @@ form{
 	font-size: 20px;
 	padding: 10px 20px;
 }
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
 
 /*--------------------Style for Upload Page-----------------*/
 

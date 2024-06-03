@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a056c1f-3d55-4d16-b879-30c550b7d351" name="Changes" comment="Fixed Styling, Do not add anymore fonts file, it will not be seen.">
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_22_2024_2_09_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_22_2024_2_09_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2024_10_05_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2024_10_05_AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2024_12_50_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2024_12_50_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +40,12 @@
     &quot;accountId&quot;: &quot;a0bfcd3b-0979-4540-87ce-cfdbb507d1e6&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="300" />
+    </hideBySeverity>
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -43,9 +58,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "18.15.0",
-    "javascript.nodejs.core.library.typings.version": "18.15.13",
-    "last_opened_file_path": "C:/Users/axayt/AppData/Roaming/JetBrains/WebStorm2024.1/node/node-v18.15.0-win-x64/npm.cmd",
+    "javascript.nodejs.core.library.configured.version": "20.13.1",
+    "javascript.nodejs.core.library.typings.version": "20.13.0",
+    "last_opened_file_path": "/Users/mahmoudhamid/Desktop/NHL_Stenden_PHP_Docker_Env-0.4/app/public/Group-I-Project-Innovate-",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -53,7 +68,7 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "C:\\Users\\axayt\\AppData\\Roaming\\JetBrains\\WebStorm2024.1\\node\\node-v18.15.0-win-x64\\npm.cmd",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "C:\\Users\\axayt\\WebstormProjects\\Group-I-Project-Innovate-\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Users/mahmoudhamid/Desktop/NHL_Stenden_PHP_Docker_Env-0.4/app/public/Group-I-Project-Innovate-/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,7 +81,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17011.90" />
       </set>
     </attachedChunks>
   </component>
@@ -86,6 +101,7 @@
       <workItem from="1716371105411" duration="887000" />
       <workItem from="1716374233481" duration="7871000" />
       <workItem from="1716537918074" duration="42675000" />
+      <workItem from="1717420039855" duration="499000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed Styling, Do not add anymore fonts file, it will not be seen.">
       <option name="closed" value="true" />
