@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt');
 
-export default function hashPassword(unHashedPassword: string): string {
-
-    return bcrypt.hash(unHashedPassword, 10).then(function (hash: string) {
-        return hash;
-    });
+export default async function hashPassword(unHashedPassword: string): Promise<string> {
+    try {
+        return await bcrypt.hash(unHashedPassword, 10);
+    } catch (error) {
+        console.error("Error hashing password:", error);
+        throw error; // Or handle the error differently
+    }
 }

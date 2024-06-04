@@ -3,7 +3,6 @@
 export default function Main() {
     async function submitHandler(event: any) {
         event.preventDefault()
-
         const nickName = event.target.nickName.value
         const email = event.target.email.value
         const password = event.target.password.value
@@ -60,10 +59,10 @@ export default function Main() {
                     <p/><input type={"password"} name={"password"}/>
                     <p/><label htmlFor={"confirmPassword"}>Confirm password</label>
                     <p/><input type={"password"} name={"confirmPassword"}/>
+                    <div className={"centeringElementsLoginForm"}>
+                        <button className={"indexButtonLogin"}>Register</button>
+                    </div>
                 </form>
-                <div className={"centeringElementsLoginForm"}>
-                    <button className={"indexButtonLogin"}><a href={""}>Register</a></button>
-                </div>
             </div>
         </div>
     );
