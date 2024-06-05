@@ -162,7 +162,7 @@ form{
 
 
 /*-------------Style for Register Form-----------*/
-.registrationForm{
+.registrationForm {
     padding-top: 10vh;
     padding-bottom: 10vh;
     max-width: 100%;
@@ -172,11 +172,16 @@ form{
     justify-content: center;
 }
 
-.containerFormRegister{
+.containerFormRegister {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 3vh;
-    width: 40vh;
+    width: 55vh; /* Increased width for wider input fields */
+}
+
+.registrationForm .header {
+    display: flex;
+    align-items: center;
 }
 
 .registrationForm h1 {
@@ -184,19 +189,38 @@ form{
     font-family: Signika, serif;
 }
 
-.registrationForm label{
+.registrationForm label {
     display: block;
     font-weight: bold;
     font-size: 36px;
     font-family: Signika-Light, serif;
 }
 
-.registrationForm input{
+.registrationForm input {
     width: 100%;
-    padding: 8px;
+    padding: 8px; /* Maintained padding to keep the height consistent */
+    margin-bottom: 10px; /* Added margin for better spacing */
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+.indexButtonLogin {
+    display: flex;
+    background-color: #B4CDED;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.indexButtonLogin a {
+    color: #272A3D;
+    text-decoration: none;
+    font-family: Signika-Light, serif;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 /*---------------------------- Style For Login Form-----------------------*/

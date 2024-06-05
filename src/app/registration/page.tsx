@@ -48,6 +48,7 @@ export default function Main() {
     return (
         <div className={"registrationForm"}>
             <div className={"containerFormRegister"}>
+                
                 <h1>Register</h1>
                 <div className="coloredLine"></div>
                 <form onSubmit={submitHandler}>
