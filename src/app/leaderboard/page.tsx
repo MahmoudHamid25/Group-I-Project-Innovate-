@@ -20,6 +20,7 @@ export default function Profile() {
 			<h1>Leaderboard</h1>
 
 			<table className='leaderboard_table'>
+				<thead>
 				<tr>
 					<td>Positions</td>
 					<td>Name</td>
@@ -28,8 +29,10 @@ export default function Profile() {
 					<td>Average</td>
 					<td>Score</td>
 				</tr>
+				</thead>
 				{data &&
 					data.map((row: any, i) => (
+						<tbody>
 						<tr key={i}>
 							<td>{i + 1}.</td>
 							<td>{row.nickname}</td>
@@ -38,6 +41,7 @@ export default function Profile() {
 							<td></td>
 							<td>{row.score}</td>
 						</tr>
+						</tbody>
 					))}
 			</table>
 		</div>

@@ -1,3 +1,25 @@
+/*----------ROOT VARIABLES----------*/
+:root {
+    --main-font: 'Signika', serif;
+    --light-font: 'Signika-Light', serif;
+    --medium-font: 'Signika-Medium', serif;
+    --semi-bold-font: 'Signika-SemiBold', serif;
+    --primary-color: #272A3D;
+    --secondary-color: #434867;
+    --accent-color: #B4CDED;
+    --text-color: white;
+    --link-color: #007bff;
+    --border-radius: 15px;
+    --border-radius-small: 4px;
+    --font-size-large: 46px;
+    --font-size-medium: 20px;
+    --font-size-small: 14px;
+    --spacing-large: 20px;
+    --spacing-medium: 10px;
+    --spacing-small: 8px;
+    --error-color: red;
+}
+
 /*----------FONTS--------*/
 @font-face {
     font-family: "Signika-SemiBold";
@@ -23,32 +45,32 @@ html,body{
     min-height: 100vh;
     margin: 0 auto;
     padding: 0;
-    font-family: Signika, serif;
-    color: #272A3D;
+    font-family: var(--main-font);
+    color: var(--primary-color);
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
 .navBar{
-    background-color: #272A3D;
+    background-color: var(--primary-color);
     display: flex;
     justify-content: space-between;
-    color: white;
+    color: var(--text-color);
     padding: 1.5vh;
     font-size: 20pt;
 }
 
 a{
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
-    font-family: Signika, serif;
+    font-family: var(--main-font);
 }
 
 .coloredLine{
     width: 100%;
     height: 0.0625rem;
-    background: #272A3D;
+    background: var(--primary-color);
 }
 
 .navMenu{
@@ -58,10 +80,10 @@ a{
 }
 
 .dropdownMenu{
-    background-color: #434867;
+    background-color: var(--secondary-color);
     position: absolute;
     block-size: auto;
-    border-radius: 15px 0px 15px 15px;
+    border-radius: var(--border-radius);
     padding: 1vh;
     display: flex;
     flex-flow: column nowrap;
@@ -76,14 +98,14 @@ a{
 }
 
 .mainText h1{
-    font-size: 46px;
+    font-size: var(--font-size-large);
 }
 .mainText p{
-    font-size: 20px;
-    padding-right: 20%;
+    font-size: var(--font-size-medium);
+    padding-right: var(--spacing-large);
 }
 .createQuizzP{
-    font-size: 20px;
+    font-size: var(--font-size-medium);
     text-align: center;
 }
 
@@ -99,7 +121,7 @@ a{
 }
 
 .quizzText{
-    font-family: Signika-Light, serif;
+    font-family: var(--light-font);
     font-size: 40px;
 }
 
@@ -109,27 +131,23 @@ a{
     gap: 12%;
 }
 
+.logout:hover {
+    cursor: pointer;
+}
+
 .sideText h1 {
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 32px;
+    font-size: var(--font-size-medium);
 }
 
-.indexButtonHomePage{
-    background-color: #272A3D;
-    color: white;
+.indexButtonHomePage, .indexButton{
+    background-color: var(--primary-color);
+    color: var(--text-color);
     font-size: 32px;
     padding: 20px 50px;
-    border-radius: 10rem;
-}
-
-.indexButton{
-    background-color: #272A3D;
-    color: white;
-    font-size: 32px;
-    padding: 15px 40px;
     border-radius: 10rem;
 }
 
@@ -145,8 +163,8 @@ main {
 }
 
 footer{
-    background-color: #272A3D;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 1rem;
 }
 
@@ -156,13 +174,11 @@ footer{
 }
 
 form{
-    padding-bottom: 2rem;
+    padding: 2rem 0rem 2rem 0rem;
 }
 
-
-
 /*-------------Style for Register Form-----------*/
-.registrationForm {
+.registrationForm{
     padding-top: 10vh;
     padding-bottom: 10vh;
     max-width: 100%;
@@ -170,57 +186,49 @@ form{
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
+
 }
 
-.containerFormRegister {
+.containerFormRegister{
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 3vh;
-    width: 55vh; /* Increased width for wider input fields */
+    width: 40vh;
 }
 
-.registrationForm .header {
+.registrationForm form {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
 .registrationForm h1 {
-    font-size: 46px;
-    font-family: Signika, serif;
+    font-size: var(--font-size-large);
+    font-family: var(--main-font);
 }
 
-.registrationForm label {
-    display: block;
-    font-weight: bold;
-    font-size: 36px;
-    font-family: Signika-Light, serif;
+.registrationForm label{
+    display: flex;
+    align-self: flex-start;
+    font-size: 25px;
+    font-family: var(--light-font);
+    padding-top: .5rem;
 }
 
-.registrationForm input {
+.registrationForm input{
     width: 100%;
-    padding: 8px; /* Maintained padding to keep the height consistent */
-    margin-bottom: 10px; /* Added margin for better spacing */
+    padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
     box-sizing: border-box;
 }
 
-.indexButtonLogin {
-    display: flex;
-    background-color: #B4CDED;
-    padding: 10px 40px;
-    border: none;
-    border-radius: 50px;
-    text-align: center;
-    text-decoration: none;
-}
-
-.indexButtonLogin a {
-    color: #272A3D;
-    text-decoration: none;
-    font-family: Signika-Light, serif;
-    font-size: 32px;
-    font-weight: bold;
+.registrationForm input[type="submit"] {
+    border-radius: 16px;
+    font-size: 16px;
+    padding: .4rem .8rem .4rem .8rem;
 }
 
 /*---------------------------- Style For Login Form-----------------------*/
@@ -244,37 +252,59 @@ form{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 1rem;
 }
 
 .loginForm .header {
     display: flex;
     align-items: center;
 }
+.loginForm form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
 .loginForm h1 {
-    font-size: 46px;
-    font-family: Signika, serif;
+    font-size: var(--font-size-large);
+    font-family: var(--main-font);
 }
 
-.loginForm label {
-    display: block;
-    font-weight: bold;
-    font-size: 36px;
-    font-family: Signika-Light, serif;
+.loginForm label{
+    display: flex;
+    align-self: flex-start;
+    font-size: 25px;
+    font-family: var(--light-font);
+    padding-top: .5rem;
 }
-
-.loginForm input {
+.loginForm input{
     width: 100%;
     padding: 8px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
     box-sizing: border-box;
+}
+
+.loginForm input[type="submit"] {
+    border-radius: 16px;
+    font-size: 16px;
+    padding: .4rem .8rem .4rem .8rem;
+}
+
+.forgotPasswordWrapper {
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-end;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .indexButtonLogin {
     display: flex;
-    background-color: #B4CDED;
+    background-color: var(--accent-color);
     padding: 10px 40px;
     border: none;
     border-radius: 50px;
@@ -283,9 +313,9 @@ form{
 }
 
 .indexButtonLogin a {
-    color: #272A3D;
+    color: var(--primary-color);
     text-decoration: none;
-    font-family: Signika-Light, serif;
+    font-family: var(--light-font);
     font-size: 32px;
     font-weight: bold;
 }
@@ -295,9 +325,9 @@ form{
 }
 
 .forgotpasswordText{
-    color: #007bff;
+    color: var(--link-color);
     text-decoration: none;
-    font-size: 14px;
+    font-size: var(--font-size-small);
 }
 
 .forgotPassword a:hover {
@@ -305,31 +335,31 @@ form{
 }
 /* Profile?*/
 .wrapper {
-	max-width: 1200px;
-	margin: 50px auto;
+    max-width: 1200px;
+    margin: 50px auto;
 }
 
 .input_wrapper label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 5px;
-	font-size: 20px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 20px;
 }
 
 .input_wrapper input {
-	width: 100%;
-	padding: 8px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .button {
-	border-radius: 100px;
-	font-weight: bold;
-	background: #b4ccee;
-	font-size: 20px;
-	padding: 10px 20px;
+    border-radius: 100px;
+    font-weight: bold;
+    background: #b4ccee;
+    font-size: 20px;
+    padding: 10px 20px;
 }
 .error {
     color: red;
