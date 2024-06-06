@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (method === 'POST') {
         try {
-            const response = await fetch('http://localhost:5000/generate_quiz', {
+            const response = await fetch('http://localhost:5003/generate_quiz', {
                 method: 'POST',
                 body: req.body,
                 headers: {
