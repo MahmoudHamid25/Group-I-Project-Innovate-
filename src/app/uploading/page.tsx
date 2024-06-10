@@ -28,7 +28,7 @@ const GenerateQuizPage: React.FC = () => {
         formData.append('prompt', prompt);
 
         try {
-            const res = await fetch('/api/generate_quiz', {
+            const res = await fetch('/api/generatequiz', {
                 method: 'POST',
                 body: formData,
             });
