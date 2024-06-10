@@ -46,22 +46,21 @@ const GenerateQuizPage: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="document">Document:</label>
-                    <input type="file" id="document" onChange={handleFileChange} required />
+                    <input type="file" id="document" onChange={handleFileChange} required accept=".txt,.pdf,.doc,.docx,.md"/>
                 </div>
                 <div>
                     <label htmlFor="prompt">Prompt:</label>
-                    <input
-                        type="text"
-                        id="prompt"
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        required
-                    />
+                    <input type="text" id="prompt" value={prompt} onChange={(e) => setPrompt(e.target.value)} required />
                 </div>
                 <button type="submit">Generate Quiz</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            {response && <div><pre>{JSON.stringify(response, null, 2)}</pre></div>}
+            {response && (
+                <div>
+                    <h2>Quiz Generated Successfully</h2>
+                    <pre>{JSON.stringify(response, null, 2)}</pre>
+                </div>
+            )}
         </div>
     );
 };

@@ -1,12 +1,12 @@
-from flask import Flask, request, jsonify
+import PyPDF2
+from docx import Document
+import logging
+import mysql.connector
+from flask import Flask, request, jsonify, render_template
+from werkzeug.utils import secure_filename
 import openai
 import os
 from dotenv import load_dotenv
-from werkzeug.utils import secure_filename
-import PyPDF2
-from docx import Document
-import mysql.connector
-import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -33,9 +33,8 @@ def extract_text_from_file(filepath):
                 content = f.read()
         elif filepath.endswith('.pdf'):
             with open(filepath, 'rb') as f:
-                reader = PyPDF2.PdfFileReader(f)
-                for page_num in range(reader.numPages):
-                    page = reader.getPage(page_num)
+                reader = PyPDF2.PdfReader(f)
+                for page in reader.pages:
                     content += page.extract_text()
         elif filepath.endswith('.docx'):
             doc = Document(filepath)
@@ -77,6 +76,10 @@ def save_quiz_to_db(quiz_title, questions_answers):
     finally:
         cursor.close()
         conn.close()
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/generate_quiz', methods=['POST'])
 def generate_quiz():
@@ -132,12 +135,12 @@ def generate_quiz():
                 question = None
                 for line in lines:
                     if line.startswith('Q:'):
-                        question = line[2:].strip()
+                        question = line[2:].trim()
                         questions_answers[question] = []
                     elif line.startswith('A') and question:
                         answer_text = line[3:].strip()
                         is_correct = '(correct)' in answer_text.lower()
-                        answer_text = answer_text.replace('(correct)', '').replace('(incorrect)', '').strip()
+                        answer_text = answer_text.replace('(correct)', '').replace('(incorrect)', '').trim()
                         questions_answers[question].append((answer_text, is_correct))
                 
                 # Save the quiz to the database
@@ -154,23 +157,7 @@ def generate_quiz():
 
     return jsonify({'error': 'File not allowed'}), 400
 
-@app.route('/test_db_connection', methods=['GET'])
-def test_db_connection():
-    try:
-        # Attempt to establish a database connection
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="qwerty",
-            database="StudyHub"
-        )
-        conn.close()
-        return jsonify({'message': 'Database connection successful!'}), 200
-    except mysql.connector.Error as err:
-        logger.error(f"Database connection error: {err}")
-        return jsonify({'error': 'Database connection failed!', 'details': str(err)}), 500
-
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
-    app.run(debug=True, host='0.0.0.0', port=5003)
+    app.run(debug=True, port=5003)
