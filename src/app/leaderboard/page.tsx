@@ -14,7 +14,7 @@ export default function Profile() {
 
 		fetchData()
 	}, [])
-
+	
 	return (
 		<div>
 			<h1>Leaderboard</h1>
@@ -30,9 +30,9 @@ export default function Profile() {
 					<td>Score</td>
 				</tr>
 				</thead>
-				{data &&
+				{data.length !== 0 &&
 					data.map((row: any, i) => (
-						<tbody>
+						<tbody key={i}>
 						<tr key={i}>
 							<td>{i + 1}.</td>
 							<td>{row.nickname}</td>
