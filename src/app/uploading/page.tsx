@@ -28,13 +28,22 @@ const GenerateQuizPage: React.FC = () => {
         formData.append('prompt', prompt);
 
         try {
-            const res = await fetch('/api/generatequiz', {
+            const res = await fetch('/api/saveDoc', {
                 method: 'POST',
                 body: formData,
             });
 
             const data = await res.json();
-            setResponse(data);
+            if (data.success) {
+                // Trigger Python backend to process the document and prompt
+                const pythonRes = await fetch('http://127.0.0.1:5003/process_document', {
+                    method: 'POST',
+                });
+                const pythonData = await pythonRes.json();
+                setResponse(pythonData);
+            } else {
+                setError('Failed to save document and prompt');
+            }
         } catch (error) {
             setError('Failed to generate quiz');
         }
