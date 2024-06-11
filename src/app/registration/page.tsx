@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Image from "next/image";
 
 export default function Main() {
     const [errorMessage, setErrorMessage] = useState('');
@@ -67,24 +68,27 @@ export default function Main() {
     return (
         <div className="registrationForm">
             <div className="containerFormRegister">
+                <div className="centeringElementsLoginForm">
+                    <Image src="/icon.svg" alt="StudyHub Logo" width={80} height={80}/>
+                </div>
                 <h1>Register</h1>
                 <div className="coloredLine"></div>
                 <form onSubmit={submitHandler}>
                     <label htmlFor="nickName">Nickname</label>
-                    <input type="text" name="nickName" required />
+                    <input type="text" name="nickName" required/>
 
                     <label htmlFor="email">E-mail address</label>
-                    <input type="email" name="email" required />
+                    <input type="email" name="email" required/>
 
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" required />
+                    <input type="password" name="password" required/>
 
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input type="password" name="confirmPassword" required />
-                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                    {succesMessage && <p style={{ color: 'green' }}>{succesMessage}</p>}
+                    <input type="password" name="confirmPassword" required/>
+                    {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    {succesMessage && <p style={{color: 'green'}}>{succesMessage}</p>}
                     <div className="centeringElementsLoginForm">
-                        <input type="submit" className="indexButtonLogin" value="Register" />
+                        <input type="submit" className="indexButtonLogin" value="Register"/>
                     </div>
                 </form>
             </div>
