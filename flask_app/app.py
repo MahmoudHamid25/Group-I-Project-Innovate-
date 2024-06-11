@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template
 import openai
 import os
 from dotenv import load_dotenv
@@ -33,9 +33,9 @@ def extract_text_from_file(filepath):
                 content = f.read()
         elif filepath.endswith('.pdf'):
             with open(filepath, 'rb') as f:
-                reader = PyPDF2.PdfReader(f)
-                for page_num in range(len(reader.pages)):
-                    page = reader.pages[page_num]
+                reader = PyPDF2.PdfFileReader(f)
+                for page_num in range(reader.numPages):
+                    page = reader.getPage(page_num)
                     content += page.extract_text()
         elif filepath.endswith('.docx'):
             doc = Document(filepath)
@@ -62,18 +62,16 @@ def save_quiz_to_db(quiz_title, questions_answers):
         # Insert the quiz
         cursor.execute("INSERT INTO Quizzes (name) VALUES (%s)", (quiz_title,))
         quiz_id = cursor.lastrowid
-        logger.info(f"Inserted quiz with ID: {quiz_id}")
 
         # Insert the questions and answers
         for question, answers in questions_answers.items():
             cursor.execute("INSERT INTO Questions (quiz_id, question_text) VALUES (%s, %s)", (quiz_id, question))
             question_id = cursor.lastrowid
-            logger.info(f"Inserted question with ID: {question_id}")
             for answer, is_correct in answers:
                 cursor.execute("INSERT INTO Answers (question_id, answer_text, is_correct) VALUES (%s, %s, %s)", (question_id, answer, is_correct))
-                logger.info(f"Inserted answer for question ID: {question_id}")
 
         conn.commit()
+        return quiz_id
     except mysql.connector.Error as err:
         logger.error(f"Database error: {err}")
         raise
@@ -83,16 +81,16 @@ def save_quiz_to_db(quiz_title, questions_answers):
 
 @app.route('/')
 def index():
-    return render_template('upload.html')
+    return render_template('index.html')
 
 @app.route('/generate_quiz', methods=['POST'])
 def generate_quiz():
     try:
         if 'document' not in request.files:
-            return render_template('upload.html', error='No document part')
+            return jsonify({'error': 'No document part'}), 400
         file = request.files['document']
         if file.filename == '':
-            return render_template('upload.html', error='No selected file')
+            return jsonify({'error': 'No selected file'}), 400
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -148,10 +146,13 @@ def generate_quiz():
                         questions_answers[question].append((answer_text, is_correct))
                 
                 # Save the quiz to the database
-                quiz_title = prompt  # or derive a title from the prompt/document
-                save_quiz_to_db(quiz_title, questions_answers)
+                quiz_title = prompt  # Placeholder title, to be updated later
+                quiz_id = save_quiz_to_db(quiz_title, questions_answers)
 
-                return jsonify({'message': 'Quiz generated and saved successfully.'})
+                # Save the generated quiz ID in a session or cookie (not shown here)
+                # ...
+
+                return jsonify({'message': 'Quiz generated and saved successfully.', 'quiz_id': quiz_id})
             except openai.error.OpenAIError as e:
                 logger.error(f"OpenAI API error: {e}")
                 return render_template('upload.html', error='Failed to generate quiz. Please try again later.')
@@ -161,21 +162,30 @@ def generate_quiz():
 
     return render_template('upload.html', error='File not allowed')
 
-@app.route('/test_db_connection', methods=['GET'])
-def test_db_connection():
+@app.route('/update_quiz_title', methods=['POST'])
+def update_quiz_title():
     try:
-        # Attempt to establish a database connection
+        quiz_id = request.form['quiz_id']
+        quiz_name = request.form['quiz_name']
+
         conn = mysql.connector.connect(
             host="localhost",
             user="root",
             password="qwerty",
             database="StudyHub"
         )
+        cursor = conn.cursor()
+
+        cursor.execute("UPDATE Quizzes SET name = %s WHERE id = %s", (quiz_name, quiz_id))
+        conn.commit()
+
+        cursor.close()
         conn.close()
-        return jsonify({'message': 'Database connection successful!'}), 200
+
+        return jsonify({'message': 'Quiz title updated successfully.'})
     except mysql.connector.Error as err:
-        logger.error(f"Database connection error: {err}")
-        return jsonify({'error': 'Database connection failed!', 'details': str(err)}), 500
+        logger.error(f"Database error: {err}")
+        return jsonify({'error': 'Failed to update quiz title.', 'details': str(err)}), 500
 
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
