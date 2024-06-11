@@ -1,3 +1,4 @@
+import subprocess
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 import openai
 import os
@@ -147,9 +148,13 @@ def generate_quiz():
                         answer_text = answer_text.replace('(correct)', '').replace('(incorrect)', '').strip()
                         questions_answers[question].append((answer_text, is_correct))
                 
+                quiz_title = "Temporary Title"  # Temporary title
+
                 # Save the quiz to the database
-                quiz_title = prompt  # or derive a title from the prompt/document
                 save_quiz_to_db(quiz_title, questions_answers)
+
+                # # Trigger the second script to update the quiz title
+                # subprocess.run(["python3", "update_quiz_title.py"])
 
                 return jsonify({'message': 'Quiz generated and saved successfully.'})
             except openai.error.OpenAIError as e:
