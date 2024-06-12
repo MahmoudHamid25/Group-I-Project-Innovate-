@@ -189,6 +189,55 @@ def update_quiz_title():
         logger.error(f"Database error: {err}")
         return jsonify({'error': 'Failed to update quiz title.', 'details': str(err)}), 500
 
+@app.route('/quizzes', methods=['GET'])
+def quizzes():
+    try:
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM Quizzes")
+        quizzes = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(quizzes)
+
+    except mysql.connector.Error as err:
+        logger.error(f"Database error: {err}")
+        return jsonify({'error': 'Failed to fetch quizzes.', 'details': str(err)}), 500
+
+@app.route('/quiz/<int:quiz_id>', methods=['GET'])
+def quiz(quiz_id):
+    try:
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("SELECT * FROM Quizzes WHERE id = %s", (quiz_id,))
+        quiz = cursor.fetchone()
+        if not quiz:
+            return jsonify({'error': 'Quiz not found'}), 404
+
+        cursor.execute("SELECT * FROM Questions WHERE quiz_id = %s", (quiz['id'],))
+        questions = cursor.fetchall()
+
+        for question in questions:
+            cursor.execute("SELECT * FROM```python 
+            Answers WHERE question_id = %s", (question['id'],))
+            question['answers'] = cursor.fetchall()
+
+        quiz['questions'] = questions
+
+        cursor.close()
+        conn.close()
+
+        return jsonify(quiz)
+
+    except mysql.connector.Error as err:
+        logger.error(f"Database error: {err}")
+        return jsonify({'error': 'Failed to fetch quiz.', 'details': str(err)}), 500
+
+
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
