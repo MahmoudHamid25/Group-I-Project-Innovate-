@@ -61,14 +61,14 @@ def parse_quiz_content(quiz_content):
 
     for line in lines:
         line = line.strip()
-        if line.startswith('1.') or line.startswith('2.') or line.startswith('3.') or line.startswith('4.') or line.startswith('5.') or line.startswith('6.') or line.startswith('7.'):
+        if line.startswith('Q:'):
             if question:
                 questions_answers[question] = answers
-            question = line
+            question = line[2:].strip()
             answers = []
-        elif line.startswith('A)') or line.startswith('B)') or line.startswith('C)') or line.startswith('D)'):
+        elif line.startswith('A') and ':' in line:
             is_correct = '(correct)' in line.lower()
-            answer_text = line.replace('(correct)', '').strip()
+            answer_text = line.split(':', 1)[1].replace('(correct)', '').replace('(incorrect)', '').strip()
             answers.append((answer_text, is_correct))
 
     if question:
@@ -93,9 +93,10 @@ def save_quiz_to_db(quiz_title, questions_answers):
             cursor.execute("INSERT INTO Questions (quiz_id, question_text) VALUES (%s, %s)", (quiz_id, question))
             question_id = cursor.lastrowid
             for answer, is_correct in answers:
-                cursor.execute("INSERT INTO Answers (question_id, answer_text, is_correct) VALUES (%s, %s, %s)", (question_id, answer, is_correct))
+                is_correct_value = 1 if is_correct else 0  # Convert to integer
+                cursor.execute("INSERT INTO Answers (question_id, answer_text, is_correct) VALUES (%s, %s, %s)", (question_id, answer, is_correct_value))
             conn.commit()
-            logger.info(f"Inserted answer for question ID {question_id}")
+            logger.info(f"Inserted answers for question ID {question_id}")
 
         return quiz_id
     except mysql.connector.Error as err:
@@ -127,11 +128,28 @@ def generate_quiz():
             logger.info(f"Received prompt: {prompt}")
             logger.info(f"Received quiz name: {quiz_name}")
 
+            detailed_prompt = f"""
+            Generate a quiz based on the following document. The quiz should contain questions with multiple-choice answers, and indicate the correct answer clearly.
+
+            Document:
+            {document_text}
+
+            Prompt:
+            {prompt}
+
+            Format the response as follows:
+            Q: [question]
+            A1: [answer 1] (correct) / (incorrect)
+            A2: [answer 2] (correct) / (incorrect)
+            A3: [answer 3] (correct) / (incorrect)
+            A4: [answer 4] (correct) / (incorrect)
+            """
+
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": f"Generate a quiz based on the document: {document_text} Prompt: {prompt}"}
+                    {"role": "user", "content": detailed_prompt}
                 ],
                 max_tokens=1024,
                 temperature=0.7
