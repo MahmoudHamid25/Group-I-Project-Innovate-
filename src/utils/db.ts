@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise'
 const pool = mysql.createPool({
 	host: 'localhost',
 	user: 'root',
-	password: '1111',
+	password: 'qwerty',
 	database: 'StudyHub',
 	port: 3306,
 	waitForConnections: true,

@@ -1,3 +1,4 @@
+from flask import Flask, request, jsonify, render_template
 import openai
 import os
 from dotenv import load_dotenv
@@ -55,7 +56,7 @@ def generate_quiz_title(document_text):
     {document_text}
     """
 
-    try:
+     try:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",  # or "gpt-4" if you have access to it
             messages=[
@@ -76,5 +77,14 @@ if __name__ == '__main__':
         # Get the latest quiz
         quiz = get_latest_quiz()
         if quiz:
-            quiz_id, _ = quiz
-           
+            quiz_id, current_title = quiz
+            logger.info(f"Updating title for quiz ID {quiz_id} which currently has title '{current_title}'")
+
+            # Generate a new title based on the current title (assuming this represents the document text in a real use case)
+            new_title = generate_quiz_title(current_title)
+
+            # Update the quiz title in the database
+            update_quiz_title(quiz_id, new_title)
+            logger.info(f"Quiz title updated to '{new_title}' for quiz ID {quiz_id}")
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")

@@ -24,6 +24,8 @@ const parseForm = (req: NextApiRequest): Promise<{ fields: Fields; files: Files 
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    console.log('API handler reached');  // Log message to confirm the handler is called
+
     if (req.method === 'POST') {
         try {
             const { fields, files } = await parseForm(req);

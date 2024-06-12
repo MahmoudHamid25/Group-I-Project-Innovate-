@@ -1,8 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
-  }
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d55845c4-f9c3-4c5f-a79b-65607961cda6" name="Changes" comment="changing format to match log in">
+      <change afterPath="$PROJECT_DIR$/src/app/upload/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_app/update_quiz_title.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app/update_quiz_title.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/upload.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/generatequiz/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/generatequiz/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="300" />
+    </hideBySeverity>
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
 }</component>
+  <component name="ProjectId" id="2gobuDS9LtZpalh8yWN8YYhgumQ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "javascript.nodejs.core.library.configured.version": "20.14.0",
+    "javascript.nodejs.core.library.typings.version": "20.14.2",
+    "last_opened_file_path": "B:/School 23-24/Period 4 - Group I - Project Innovate - Python/WebstormProjects/Group-I-Project-Innovate-/src/app/upload",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.nodejs",
+    "ts.external.directory.path": "B:\\School 23-24\\Period 4 - Group I - Project Innovate - Python\\WebstormProjects\\Group-I-Project-Innovate-\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\School 23-24\Period 4 - Group I - Project Innovate - Python\WebstormProjects\Group-I-Project-Innovate-\src\app\upload" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\School 23-24\Period 4 - Group I - Project Innovate - Python\WebstormProjects\Group-I-Project-Innovate-\flask_app\templates" />
+      <recent name="B:\School 23-24\Period 4 - Group I - Project Innovate - Python\WebstormProjects\Group-I-Project-Innovate-\public" />
+      <recent name="B:\School 23-24\Period 4 - Group I - Project Innovate - Python\WebstormProjects\Group-I-Project-Innovate-\src\app\pages" />
+      <recent name="B:\School 23-24\Period 4 - Group I - Project Innovate - Python\WebstormProjects\Group-I-Project-Innovate-\src\app\login" />
+      <recent name="C:\Users\axayt\WebstormProjects\Group-I-Project-Innovate-\public\fonts" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17011.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d55845c4-f9c3-4c5f-a79b-65607961cda6" name="Changes" comment="changing format to match log in" />
+      <created>1716367098815</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716367098815</updated>
+      <workItem from="1716367100506" duration="1914000" />
+      <workItem from="1716369341178" duration="215000" />
+      <workItem from="1716369683926" duration="65000" />
+      <workItem from="1716369754351" duration="103000" />
+      <workItem from="1716369902925" duration="408000" />
+      <workItem from="1716371105411" duration="887000" />
+      <workItem from="1716374233481" duration="7871000" />
+      <workItem from="1716537918074" duration="42675000" />
+      <workItem from="1717420039855" duration="499000" />
+      <workItem from="1717661428221" duration="102000" />
+      <workItem from="1717661542503" duration="6461000" />
+      <workItem from="1718019412089" duration="594000" />
+      <workItem from="1718101873048" duration="15323000" />
+      <workItem from="1718152134525" duration="11408000" />
+    </task>
+    <task id="LOCAL-00001" summary="Fixed Styling, Do not add anymore fonts file, it will not be seen.">
+      <option name="closed" value="true" />
+      <created>1716941834480</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716941834480</updated>
+    </task>
+    <task id="LOCAL-00002" summary="changing format to match log in">
+      <option name="closed" value="true" />
+      <created>1718111284513</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718111284513</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed Styling, Do not add anymore fonts file, it will not be seen." />
+    <MESSAGE value="changing format to match log in" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing format to match log in" />
+  </component>
 </project>

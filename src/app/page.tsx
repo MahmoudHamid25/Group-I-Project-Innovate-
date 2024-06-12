@@ -20,7 +20,7 @@ function MainContent() {
             <div className={"sideText"}>
                 <h1>If you wish to explore more, join the community!</h1>
             <section className={"signinSignout"} >
-                <button className={"indexButtonHomePage"}><a href={"/login/"}>Log in</a> </button>
+                <button className={"indexButtonHomePage"}><a href={"/login"}>Log in</a> </button>
                 <button className={"indexButtonHomePage"}><a href={"/registration/"}>Sign up</a></button>
             </section>
             </div>

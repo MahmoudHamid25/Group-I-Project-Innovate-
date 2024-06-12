@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import openai
 import os
 from dotenv import load_dotenv
@@ -19,13 +20,16 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
+CORS(app, resources={r"/generate_quiz": {"origins": "http://localhost:3000"}})
+
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'txt', 'pdf', 'docx', 'md'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-def extract_text_from_file(filepath):
+def extract_text_from_file(filename):
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     content = ""
     try:
         if filepath.endswith('.txt'):
@@ -49,35 +53,58 @@ def extract_text_from_file(filepath):
         raise
     return content
 
+def parse_quiz_content(quiz_content):
+    questions_answers = {}
+    lines = quiz_content.split('\n')
+    question = None
+    answers = []
+
+    for line in lines:
+        line = line.strip()
+        if line.startswith('1.') or line.startswith('2.') or line.startswith('3.') or line.startswith('4.') or line.startswith('5.') or line.startswith('6.') or line.startswith('7.'):
+            if question:
+                questions_answers[question] = answers
+            question = line
+            answers = []
+        elif line.startswith('A)') or line.startswith('B)') or line.startswith('C)') or line.startswith('D)'):
+            is_correct = '(correct)' in line.lower()
+            answer_text = line.replace('(correct)', '').strip()
+            answers.append((answer_text, is_correct))
+
+    if question:
+        questions_answers[question] = answers
+
+    return questions_answers
+
 def save_quiz_to_db(quiz_title, questions_answers):
+    conn = None
     try:
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="qwerty",
-            database="StudyHub"
-        )
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
         cursor = conn.cursor()
 
-        # Insert the quiz
+        logger.info(f"Inserting quiz titled '{quiz_title}' into database...")
         cursor.execute("INSERT INTO Quizzes (name) VALUES (%s)", (quiz_title,))
         quiz_id = cursor.lastrowid
+        conn.commit()
+        logger.info(f"Quiz inserted with ID {quiz_id}")
 
-        # Insert the questions and answers
         for question, answers in questions_answers.items():
+            logger.info(f"Inserting question: {question}")
             cursor.execute("INSERT INTO Questions (quiz_id, question_text) VALUES (%s, %s)", (quiz_id, question))
             question_id = cursor.lastrowid
             for answer, is_correct in answers:
                 cursor.execute("INSERT INTO Answers (question_id, answer_text, is_correct) VALUES (%s, %s, %s)", (question_id, answer, is_correct))
+            conn.commit()
+            logger.info(f"Inserted answer for question ID {question_id}")
 
-        conn.commit()
         return quiz_id
     except mysql.connector.Error as err:
-        logger.error(f"Database error: {err}")
+        conn.rollback() if conn else None
+        logger.error(f"Database error during insert: {err}")
         raise
     finally:
-        cursor.close()
-        conn.close()
+        if conn:
+            conn.close()
 
 @app.route('/')
 def index():
@@ -85,82 +112,46 @@ def index():
 
 @app.route('/generate_quiz', methods=['POST'])
 def generate_quiz():
+    logger.info("Received POST request to /generate_quiz")
     try:
-        if 'document' not in request.files:
-            return jsonify({'error': 'No document part'}), 400
         file = request.files['document']
-        if file.filename == '':
-            return jsonify({'error': 'No selected file'}), 400
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            
-            # Extract text from the file
-            document_text = extract_text_from_file(filepath)
-            
-            prompt = request.form['prompt']
-            
-            # Combine the document content and the prompt
-            combined_prompt = f"""
-            Generate a quiz based on the following document. The quiz should contain questions with multiple-choice answers, and indicate the correct answer clearly.
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)  # Save file to the correct directory
+            logger.info(f"File saved to {file_path}")
 
-            Document:
-            {document_text}
+            document_text = extract_text_from_file(filename)
+            prompt = request.form.get('prompt', 'Default prompt if none provided')
+            quiz_name = request.form.get('quiz_name', 'Default quiz name')
+            logger.info(f"Received prompt: {prompt}")
+            logger.info(f"Received quiz name: {quiz_name}")
 
-            Prompt:
-            {prompt}
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": f"Generate a quiz based on the document: {document_text} Prompt: {prompt}"}
+                ],
+                max_tokens=1024,
+                temperature=0.7
+            )
 
-            Format the response as follows:
-            Q: [question]
-            A1: [answer 1] (correct) / (incorrect)
-            A2: [answer 2] (correct) / (incorrect)
-            A3: [answer 3] (correct) / (incorrect)
-            A4: [answer 4] (correct) / (incorrect)
-            """
-            
-            try:
-                response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",  # or "gpt-4" if you have access to it
-                    messages=[
-                        {"role": "system", "content": "You are a helpful assistant."},
-                        {"role": "user", "content": combined_prompt}
-                    ],
-                    max_tokens=1024,
-                    temperature=0.7
-                )
-                quiz_content = response['choices'][0]['message']['content'].strip()
+            quiz_content = response.choices[0].message['content'].strip()
+            logger.info(f"Quiz content from OpenAI: {quiz_content}")
+            questions_answers = parse_quiz_content(quiz_content)
+            logger.info(f"Parsed questions and answers: {questions_answers}")
 
-                # Parse the quiz content into questions and answers
-                questions_answers = {}
-                lines = quiz_content.split('\n')
-                question = None
-                for line in lines:
-                    if line.startswith('Q:'):
-                        question = line[2:].strip()
-                        questions_answers[question] = []
-                    elif line.startswith('A') and question:
-                        answer_text = line[3:].strip()
-                        is_correct = '(correct)' in answer_text.lower()
-                        answer_text = answer_text.replace('(correct)', '').replace('(incorrect)', '').strip()
-                        questions_answers[question].append((answer_text, is_correct))
-                
-                # Save the quiz to the database
-                quiz_title = prompt  # Placeholder title, to be updated later
-                quiz_id = save_quiz_to_db(quiz_title, questions_answers)
+            quiz_id = save_quiz_to_db(quiz_name, questions_answers)
+            logger.info(f"Quiz saved with ID: {quiz_id}")
 
-                # Save the generated quiz ID in a session or cookie (not shown here)
-                # ...
+            return jsonify({'message': 'Quiz generated successfully!', 'quiz_content': quiz_content})
+        else:
+            return jsonify({'error': 'Invalid or no file provided'}), 400
 
-                return jsonify({'message': 'Quiz generated and saved successfully.', 'quiz_id': quiz_id})
-            except openai.error.OpenAIError as e:
-                logger.error(f"OpenAI API error: {e}")
-                return render_template('upload.html', error='Failed to generate quiz. Please try again later.')
     except Exception as e:
-        logger.error(f"Error processing request: {e}")
-        return render_template('upload.html', error='Internal Server Error')
-
-    return render_template('upload.html', error='File not allowed')
+        logger.error(f"OpenAI API error received: {str(e)}")
+        return jsonify({'error': 'Failed to generate quiz', 'details': str(e)}), 500
 
 @app.route('/update_quiz_title', methods=['POST'])
 def update_quiz_title():
@@ -168,17 +159,10 @@ def update_quiz_title():
         quiz_id = request.form['quiz_id']
         quiz_name = request.form['quiz_name']
 
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="qwerty",
-            database="StudyHub"
-        )
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
         cursor = conn.cursor()
-
         cursor.execute("UPDATE Quizzes SET name = %s WHERE id = %s", (quiz_name, quiz_id))
         conn.commit()
-
         cursor.close()
         conn.close()
 
