@@ -2,31 +2,30 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2/promise';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { id } = req.query;
-
     const connection = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: 'qwerty',
-        database: 'StudyHub'
+        database: 'StudyHub',
     });
 
     try {
-        const [quizRows]: any = await connection.execute('SELECT * FROM Quizzes WHERE id = ?', [id]);
+        // Get the last quiz
+        const [quizRows]: [any[], any] = await connection.execute('SELECT * FROM Quizzes ORDER BY id DESC LIMIT 1');
         if (quizRows.length === 0) {
-            return res.status(404).json({ error: 'Quiz not found' });
+            return res.status(404).json({ error: 'No quizzes found' });
         }
-
         const quiz = quizRows[0];
 
-        const [questionRows]: any = await connection.execute('SELECT * FROM Questions WHERE quiz_id = ?', [id]);
+        // Get questions for the quiz
+        const [questionRows]: [any[], any] = await connection.execute('SELECT * FROM Questions WHERE quiz_id = ?', [quiz.id]);
         const questions = [];
 
         for (const question of questionRows) {
-            const [answerRows]: any = await connection.execute('SELECT * FROM Answers WHERE question_id = ?', [question.id]);
+            const [answerRows]: [any[], any] = await connection.execute('SELECT * FROM Answers WHERE question_id = ?', [question.id]);
             questions.push({
                 ...question,
-                answers: answerRows
+                answers: answerRows,
             });
         }
 

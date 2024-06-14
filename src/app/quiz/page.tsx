@@ -1,94 +1,80 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 const QuizPage: React.FC = () => {
-    const router = useRouter();
-    const { id } = router.query;
     const [quiz, setQuiz] = useState<any>(null);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [score, setScore] = useState<number>(0);
 
     useEffect(() => {
         const fetchQuiz = async () => {
             try {
-                const response = await fetch(`/api/quiz/${id}`);
+                const response = await fetch('/api/quiz');
                 const data = await response.json();
-                setQuiz(data);
+                if (response.ok) {
+                    setQuiz(data);
+                } else {
+                    console.error(data.error);
+                }
             } catch (error) {
-                setErrorMessage('Failed to load quiz');
+                console.error('Failed to fetch quiz:', error);
             }
         };
 
-        if (id) {
-            fetchQuiz();
-        }
-    }, [id]);
+        fetchQuiz();
+    }, []);
 
-    const handleAnswerSelect = (answerId: number) => {
-        setSelectedAnswer(answerId);
+    const handleAnswerSelection = (index: number) => {
+        setSelectedAnswer(index);
     };
 
     const handleNextQuestion = () => {
-        if (selectedAnswer === null) {
-            setErrorMessage('Please select an answer.');
-            return;
+        if (quiz.questions[currentQuestionIndex].answers[selectedAnswer!].is_correct) {
+            setScore(score + 1);
         }
-
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedAnswer(null);
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
     };
 
     if (!quiz) {
         return <div>Loading...</div>;
     }
 
+    if (currentQuestionIndex >= quiz.questions.length) {
+        return (
+            <div>
+                <h2>Quiz Completed</h2>
+                <p>Your Score: {score} / {quiz.questions.length}</p>
+            </div>
+        );
+    }
+
     const currentQuestion = quiz.questions[currentQuestionIndex];
 
     return (
-        <div className="quiz-container">
-            <div className="quiz-header">
-                <h2>{quiz.name}</h2>
-                <div className="question-counter">
-                    {currentQuestionIndex + 1} / {quiz.questions.length}
-                </div>
-            </div>
-            <div className="question-section">
-                <h3>{currentQuestion.question_text}</h3>
-                <div className="answers">
-                    {currentQuestion.answers.map((answer: any) => (
-                        <div
-                            key={answer.id}
-                            className={`answer ${selectedAnswer === answer.id ? 'selected' : ''}`}
-                            onClick={() => handleAnswerSelect(answer.id)}
+        <div>
+            <h2>{quiz.name}</h2>
+            <div>
+                <h3>Question {currentQuestionIndex + 1} / {quiz.questions.length}</h3>
+                <p>{currentQuestion.question_text}</p>
+                <div>
+                    {currentQuestion.answers.map((answer: any, index: number) => (
+                        <button
+                            key={index}
+                            onClick={() => handleAnswerSelection(index)}
                         >
-                                                        {answer.answer_text}
-                        </div>
+                            {answer.answer_text}
+                        </button>
                     ))}
                 </div>
             </div>
-            <div className="navigation">
-                {currentQuestionIndex < quiz.questions.length - 1 && (
-                    <button onClick={handleNextQuestion}>Next</button>
-                )}
-                {currentQuestionIndex === quiz.questions.length - 1 && (
-                    <button onClick={() => alert('Quiz Completed!')}>Finish</button>
-                )}
-            </div>
-            {errorMessage && (
-                <div className="error-popup">
-                    <div className="error-popup-content">
-                        <p>{errorMessage}</p>
-                        <button onClick={() => setErrorMessage(null)}>Close</button>
-                    </div>
-                </div>
-            )}
+            <button onClick={handleNextQuestion} disabled={selectedAnswer === null}>
+                Next Question
+            </button>
         </div>
     );
 };
 
 export default QuizPage;
-
-                           

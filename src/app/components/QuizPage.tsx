@@ -1,23 +1,22 @@
-import { useRouter } from 'next/router';
+// src/app/components/QuizPage.tsx
+
 import { useEffect, useState } from 'react';
 
-const QuizPage: React.FC = () => {
-    const router = useRouter();
-    const { id } = router.query;
+interface QuizPageProps {
+    id: string;
+}
+
+const QuizPage: React.FC<QuizPageProps> = ({ id }) => {
     const [quiz, setQuiz] = useState<any>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
 
     useEffect(() => {
-        if (!router.isReady) return;
-
-        if (id) {
-            fetch(`/api/quiz/${id}`)
-                .then(res => res.json())
-                .then(data => setQuiz(data))
-                .catch(error => console.error('Error loading quiz:', error));
-        }
-    }, [router.isReady, id]);
+        fetch(`/api/quiz/${id}`)
+            .then(res => res.json())
+            .then(data => setQuiz(data))
+            .catch(error => console.error('Error loading quiz:', error));
+    }, [id]);
 
     const handleNextQuestion = () => {
         setSelectedAnswer(null);
