@@ -20,7 +20,10 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
 CORS(app, resources={r"/generate_quiz": {"origins": "http://localhost:3000"}})
+CORS(app, supports_credentials=True, resources={r"/quizzes": {"origins": "http://localhost:3000"}})
+
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'txt', 'pdf', 'docx', 'md'}
@@ -171,6 +174,24 @@ def generate_quiz():
         logger.error(f"OpenAI API error received: {str(e)}")
         return jsonify({'error': 'Failed to generate quiz', 'details': str(e)}), 500
 
+@app.route('/quizzes', methods=['GET'])
+def get_quizzes():
+    conn = None
+    try:
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
+        cursor = conn.cursor(dictionary=True)  # Use dictionary=True to return results as dictionaries
+        cursor.execute("SELECT id, name FROM Quizzes")
+        quizzes = cursor.fetchall()  # Fetch all quiz records
+
+        return jsonify(quizzes)  # Return quizzes as a JSON response
+    except mysql.connector.Error as err:
+        logger.error(f"Database error: {err}")
+        return jsonify({'error': 'Failed to fetch quizzes.', 'details': str(err)}), 500
+    finally:
+        if conn:
+            conn.close()  # Ensure the connection is closed after completing the query
+
+
 @app.route('/update_quiz_title', methods=['POST'])
 def update_quiz_title():
     try:
@@ -188,6 +209,52 @@ def update_quiz_title():
     except mysql.connector.Error as err:
         logger.error(f"Database error: {err}")
         return jsonify({'error': 'Failed to update quiz title.', 'details': str(err)}), 500
+
+@app.route('/quiz/<int:quiz_id>', methods=['GET'])
+def get_quiz(quiz_id):
+    conn = None
+    try:
+        conn = mysql.connector.connect(host="localhost", user="root", password="qwerty", database="StudyHub")
+        cursor = conn.cursor(dictionary=True)
+
+        # Fetch quiz name
+        cursor.execute("SELECT name FROM Quizzes WHERE id = %s", (quiz_id,))
+        quiz = cursor.fetchone()
+        if not quiz:
+            return jsonify({'error': 'Quiz not found.'}), 404
+
+        # Fetch questions and answers
+        cursor.execute("""
+            SELECT q.id AS question_id, q.question_text, a.id AS answer_id, a.answer_text, a.is_correct
+            FROM Questions q
+            JOIN Answers a ON q.id = a.question_id
+            WHERE q.quiz_id = %s
+        """, (quiz_id,))
+        results = cursor.fetchall()
+
+        questions = {}
+        for row in results:
+            question_id = row['question_id']
+            if question_id not in questions:
+                questions[question_id] = {
+                    'id': question_id,
+                    'question_text': row['question_text'],
+                    'answers': []
+                }
+            questions[question_id]['answers'].append({
+                'id': row['answer_id'],
+                'answer_text': row['answer_text'],
+                'is_correct': row['is_correct']
+            })
+
+        return jsonify({'quizName': quiz['name'], 'questions': list(questions.values())})
+
+    except mysql.connector.Error as err:
+        logger.error(f"Database error: {err}")
+        return jsonify({'error': 'Failed to fetch quiz.', 'details': str(err)}), 500
+    finally:
+        if conn:
+            conn.close()
 
 if __name__ == '__main__':
     if not os.path.exists(app.config['UPLOAD_FOLDER']):

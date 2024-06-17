@@ -2,6 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql from 'mysql2/promise';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'GET') {
+        res.setHeader('Allow', ['GET']);
+        res.status(405).end(`Method ${req.method} Not Allowed`);
+        return;
+    }
+
     const connection = await mysql.createConnection({
         host: 'localhost',
         user: 'root',
