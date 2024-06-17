@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d55845c4-f9c3-4c5f-a79b-65607961cda6" name="Changes" comment="Making upload work and fix ai handling on tsx files.">
-      <change afterPath="$PROJECT_DIR$/src/app/quiz/[id]/page.tsx" afterDir="false" />
+    <list default="true" id="d55845c4-f9c3-4c5f-a79b-65607961cda6" name="Changes" comment="Fixed API routing : QuizList works, quiz generates quizzez.&#10;| TO DO : Quiz page to be generated with radio form not as lists.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_app/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_app/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/QuizList/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/QuizList/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/quiz/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/quiz/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/quiz/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/quiz/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/upload/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/upload/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +95,7 @@
       <workItem from="1718152134525" duration="15477000" />
       <workItem from="1718356245748" duration="5564000" />
       <workItem from="1718572886488" duration="478000" />
-      <workItem from="1718573379359" duration="7378000" />
+      <workItem from="1718573379359" duration="9479000" />
     </task>
     <task id="LOCAL-00001" summary="Fixed Styling, Do not add anymore fonts file, it will not be seen.">
       <option name="closed" value="true" />
@@ -124,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718192056367</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed API routing : QuizList works, quiz generates quizzez.&#10;| TO DO : Quiz page to be generated with radio form not as lists.">
+      <option name="closed" value="true" />
+      <created>1718582930372</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718582930372</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +150,7 @@
     <MESSAGE value="Fixed Styling, Do not add anymore fonts file, it will not be seen." />
     <MESSAGE value="changing format to match log in" />
     <MESSAGE value="Making upload work and fix ai handling on tsx files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Making upload work and fix ai handling on tsx files." />
+    <MESSAGE value="Fixed API routing : QuizList works, quiz generates quizzez.&#10;| TO DO : Quiz page to be generated with radio form not as lists." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed API routing : QuizList works, quiz generates quizzez.&#10;| TO DO : Quiz page to be generated with radio form not as lists." />
   </component>
 </project>

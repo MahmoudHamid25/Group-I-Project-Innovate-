@@ -8,6 +8,8 @@ import PyPDF2
 from docx import Document
 import mysql.connector
 import logging
+import re
+import random
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -40,9 +42,9 @@ def extract_text_from_file(filename):
                 content = f.read()
         elif filepath.endswith('.pdf'):
             with open(filepath, 'rb') as f:
-                reader = PyPDF2.PdfFileReader(f)
-                for page_num in range(reader.numPages):
-                    page = reader.getPage(page_num)
+                reader = PyPDF2.PdfReader(f)
+                for page_num in range(len(reader.pages)):
+                    page = reader.pages[page_num]
                     content += page.extract_text()
         elif filepath.endswith('.docx'):
             doc = Document(filepath)
@@ -59,23 +61,42 @@ def extract_text_from_file(filename):
 def parse_quiz_content(quiz_content):
     questions_answers = {}
     lines = quiz_content.split('\n')
+    question_pattern = re.compile(r'Q: (.+)')
+    answer_pattern = re.compile(r'A\d: (.+) \((correct|Correct|incorrect|Incorrect)\)')
+
     question = None
     answers = []
 
     for line in lines:
         line = line.strip()
-        if line.startswith('Q:'):
-            if question:
-                questions_answers[question] = answers
-            question = line[2:].strip()
+        question_match = question_pattern.match(line)
+        answer_match = answer_pattern.match(line)
+
+        if question_match:
+            # Save the previous question and its answers if valid
+            if question and answers:
+                correct_answers = [a for a in answers if a[1]]
+                incorrect_answers = [a for a in answers if not a[1]]
+                if correct_answers and incorrect_answers:
+                    random.shuffle(answers)  # Shuffle answers
+                    questions_answers[question] = answers
+            question = question_match.group(1)
             answers = []
-        elif line.startswith('A') and ':' in line:
-            is_correct = '(correct)' in line.lower()
-            answer_text = line.split(':', 1)[1].replace('(correct)', '').replace('(incorrect)', '').strip()
+        elif answer_match:
+            answer_text = answer_match.group(1).strip()
+            is_correct = answer_match.group(2).lower() == 'correct'
             answers.append((answer_text, is_correct))
 
-    if question:
-        questions_answers[question] = answers
+    # Save the last question and its answers if valid
+    if question and answers:
+        correct_answers = [a for a in answers if a[1]]
+        incorrect_answers = [a for a in answers if not a[1]]
+        if correct_answers and incorrect_answers:
+            random.shuffle(answers)  # Shuffle answers
+            questions_answers[question] = answers
+
+    # Filter out invalid questions or answers
+    questions_answers = {q: a for q, a in questions_answers.items() if q and a and len(a) > 1}
 
     return questions_answers
 
@@ -95,11 +116,15 @@ def save_quiz_to_db(quiz_title, questions_answers):
             logger.info(f"Inserting question: {question}")
             cursor.execute("INSERT INTO Questions (quiz_id, question_text) VALUES (%s, %s)", (quiz_id, question))
             question_id = cursor.lastrowid
+            conn.commit()
+            logger.info(f"Question inserted with ID {question_id}")
+
             for answer, is_correct in answers:
                 is_correct_value = 1 if is_correct else 0  # Convert to integer
+                logger.info(f"Inserting answer: {answer}, Is Correct: {is_correct_value}")
                 cursor.execute("INSERT INTO Answers (question_id, answer_text, is_correct) VALUES (%s, %s, %s)", (question_id, answer, is_correct_value))
-            conn.commit()
-            logger.info(f"Inserted answers for question ID {question_id}")
+                conn.commit()
+                logger.info(f"Answer inserted for question ID {question_id}")
 
         return quiz_id
     except mysql.connector.Error as err:
@@ -126,6 +151,13 @@ def generate_quiz():
             logger.info(f"File saved to {file_path}")
 
             document_text = extract_text_from_file(filename)
+
+            # Ensure the document text fits within the token limit
+            max_token_length = 15000  # Set a limit to avoid exceeding the API's token limit
+            if len(document_text) > max_token_length:
+                document_text = document_text[:max_token_length]
+                logger.warning("Document text truncated to fit within token limit")
+
             prompt = request.form.get('prompt', 'Default prompt if none provided')
             quiz_name = request.form.get('quiz_name', 'Default quiz name')
             logger.info(f"Received prompt: {prompt}")
@@ -163,10 +195,15 @@ def generate_quiz():
             questions_answers = parse_quiz_content(quiz_content)
             logger.info(f"Parsed questions and answers: {questions_answers}")
 
+            # Check if questions and answers are correctly parsed
+            if not questions_answers:
+                logger.error('No questions and answers parsed from quiz content')
+                return jsonify({'error': 'Failed to parse questions and answers from quiz content'}), 500
+
             quiz_id = save_quiz_to_db(quiz_name, questions_answers)
             logger.info(f"Quiz saved with ID: {quiz_id}")
 
-            return jsonify({'message': 'Quiz generated successfully!', 'quiz_content': quiz_content})
+            return jsonify({'message': 'Quiz generated successfully!', 'quiz_content': quiz_content, 'quiz_id': quiz_id})
         else:
             return jsonify({'error': 'Invalid or no file provided'}), 400
 

@@ -1,5 +1,4 @@
 'use client'
-// QuizGenerator.tsx
 import React, { useState, useRef } from 'react';
 
 const QuizGenerator: React.FC = () => {
@@ -10,6 +9,7 @@ const QuizGenerator: React.FC = () => {
     const [fileName, setFileName] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [successMessage, setSuccessMessage] = useState<string | null>(null);
+    const [quizId, setQuizId] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +31,7 @@ const QuizGenerator: React.FC = () => {
         setFileName('');
         setErrorMessage(null);
         setSuccessMessage(null);
+        setQuizId(null);
     };
 
     const saveQuiz = async () => {
@@ -52,6 +53,7 @@ const QuizGenerator: React.FC = () => {
             const data = await response.json();
             if (response.ok) {
                 setSuccessMessage(data.message);
+                setQuizId(data.quiz_id); // Set the quiz ID
             } else {
                 throw new Error(data.message || 'Failed to save the quiz.');
             }
@@ -62,7 +64,11 @@ const QuizGenerator: React.FC = () => {
     };
 
     const redirectToQuiz = () => {
-        window.location.href = 'http://localhost:3000/quiz';
+        if (quizId) {
+            window.location.href = `http://localhost:3000/quiz/${quizId}`;
+        } else {
+            window.location.href = 'http://localhost:3000/QuizList';
+        }
     };
 
     return (
