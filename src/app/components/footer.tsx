@@ -1,24 +1,36 @@
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+
 export function Footer() {
     return (
-        <footer>
-            <div className={"footerGrid"}>
-                <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat elit in quam scelerisque
-                        tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut interdum rhoncus ligula,
-                        et iaculis tellus congue quis. Suspendisse potenti. Aliquam tristique eros a leo dapibus
-                        tincidunt. Sed sed turpis ipsum. Mauris pharetra lobortis ex, quis tincidunt tellus egestas
-                        vel.</p>
+        <footer className="footer">
+            <div className="footerGrid">
+                <div className="footerSection">
+                    <h4>Contact Us</h4>
+                    <p>Email: support@studyhub.com</p>
+                    <p>Phone: +31 123 456 789</p>
+                    <p>Address: 123 StudyHub Lane, Emmen, Netherlands</p>
                 </div>
-                <div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat elit in quam scelerisque
-                        tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut interdum rhoncus ligula,
-                        et iaculis tellus congue quis. Suspendisse potenti. Aliquam tristique eros a leo dapibus
-                        tincidunt. Sed sed turpis ipsum. Mauris pharetra lobortis ex, quis tincidunt tellus egestas vel.
-                    </p>
+                <div className="footerSection">
+                    <h4>Follow Us</h4>
+                    <div className="socialIcons">
+                        <a href="#" aria-label="Facebook">
+                            <FaFacebook />
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <FaInstagram />
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <FaTwitter />
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <FaLinkedin />
+                        </a>
+                        <a href="mailto:support@studyhub.com" aria-label="Email">
+                            <FaEnvelope />
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>
-
     );
 }

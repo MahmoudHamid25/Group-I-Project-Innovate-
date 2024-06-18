@@ -162,16 +162,47 @@ main {
     flex-grow: 1;
 }
 
-footer{
+footer {
     background-color: var(--primary-color);
     color: var(--text-color);
     padding: 1rem;
 }
 
-.footerGrid{
+.footerGrid {
     display: flex;
+    justify-content: space-between;
     gap: 10rem;
 }
+
+.footerSection {
+    flex: 1;
+}
+
+.footerSection h4 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.footerSection p {
+    margin: 0.5rem 0;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+}
+
+.socialIcons a {
+    color: var(--text-color);
+    font-size: 2rem;
+}
+
+.socialIcons a:hover {
+    color: var(--hover-color);
+}
+
 
 form{
     padding: 2rem 0rem 2rem 0rem;
