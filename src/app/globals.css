@@ -43,7 +43,7 @@
 /*----------FONTS--------*/
 html,body{
     min-height: 100vh;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     font-family: var(--main-font);
     color: var(--primary-color);
@@ -171,7 +171,7 @@ footer {
 .footerGrid {
     display: flex;
     justify-content: space-between;
-    gap: 10rem;
+    gap: 15rem;
 }
 
 .footerSection {
@@ -179,12 +179,12 @@ footer {
 }
 
 .footerSection h4 {
-    margin-bottom: 1rem;
+    line-height: 1rem;
     font-size: 1.25rem;
 }
 
 .footerSection p {
-    margin: 0.5rem 0;
+    line-height: 0.7rem;
 }
 
 .socialIcons {
@@ -200,7 +200,7 @@ footer {
 }
 
 .socialIcons a:hover {
-    color: var(--hover-color);
+    color: var(--accent-color);
 }
 
 
