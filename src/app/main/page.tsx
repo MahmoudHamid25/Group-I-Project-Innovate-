@@ -11,7 +11,7 @@ export default function Main() {
             <RecentQuizzes/>
             <div className="coloredLine"></div>
             <div className={"buttonMain"}>
-                <button className={"indexButton"}><a href={"/uploading/"}>Create your own quiz
+                <button className={"indexButton"}><a href={"/upload/"}>Create your own quiz
                     using AI!</a>
                 </button>
             </div>

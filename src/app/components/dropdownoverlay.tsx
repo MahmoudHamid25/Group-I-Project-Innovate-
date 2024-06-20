@@ -5,9 +5,9 @@ function DropdownOverlay() {
         <div className="dropPosition">
             <div className="dropdownMenu">
                 <a href="./">Home</a>
-                <a href="/main/">After_Logging_in</a>
-                <a href="/profile/">After_log_in_Profile</a>
-                <a href="/uploading/">Prototype</a>
+                <a href="/main/">Main</a>
+                <a href="/profile/">Profile</a>
+                <a href="/upload/">Generate a quiz</a>
                 <a href="/leaderboard/">Leaderboard</a>
             </div>
         </div>
