@@ -1,49 +1,32 @@
-'use client'
+"use client"
+import { useEffect, useState } from 'react';
 
-import { useEffect, useState } from 'react'
+export default function Leaderboard() {
+    const [data, setData] = useState([]);
 
-export default function Profile() {
-	const [data, setData] = useState([])
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch('/api/leaderboard');
+            const data = await res.json();
+            setData(data);
+        }
 
-	useEffect(() => {
-		async function fetchData() {
-			const res = await fetch('/api/leaderboard')
-			const data = await res.json()
-			setData(data)
-		}
+        fetchData();
+    }, []);
 
-		fetchData()
-	}, [])
-	
-	return (
-		<div>
-			<h1>Leaderboard</h1>
-
-			<table className='leaderboard_table'>
-				<thead>
-				<tr>
-					<td>Positions</td>
-					<td>Name</td>
-					<td>Correct</td>
-					<td>Wrong</td>
-					<td>Average</td>
-					<td>Score</td>
-				</tr>
-				</thead>
-				{data.length !== 0 &&
-					data.map((row: any, i) => (
-						<tbody key={i}>
-						<tr key={i}>
-							<td>{i + 1}.</td>
-							<td>{row.nickname}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>{row.score}</td>
-						</tr>
-						</tbody>
-					))}
-			</table>
-		</div>
-	)
+    return (
+        <div className="leaderboard-container">
+            <h1 className="leaderboard-title">Leaderboard</h1>
+            <div className="leaderboard-cards">
+                {data.length !== 0 &&
+                    data.map((row: any, i) => (
+                        <div className="leaderboard-card" key={i}>
+                            <div className="position">{i + 1}.</div>
+                            <div className="name">{row.nickname}</div>
+                            <div className="score">Score: {row.score}</div>
+                        </div>
+                    ))}
+            </div>
+        </div>
+    );
 }
