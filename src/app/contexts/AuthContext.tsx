@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import {user} from "@nextui-org/theme";
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -11,7 +12,10 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const userSession = (setIsLoggedIn: boolean) => {
+},
+
+    AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const [nickName, setNickName] = useState<string>('');
 
@@ -39,16 +43,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, nickName, login, logout }}>
+        <AuthContext.Provider value={{isLoggedIn, nickName, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
-};
-
-export const useAuth = (): AuthContextType => {
+}, useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
     if (!context) {
         throw new Error('useAuth must be used within an AuthProvider');
     }
     return context;
 };
+

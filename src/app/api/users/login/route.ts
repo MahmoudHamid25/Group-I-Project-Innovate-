@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server';
 import { User } from '@/types/types';
 import { RowDataPacket } from 'mysql2';
 import { generateToken } from '@/utils/session';
+import {userSession} from "@/app/contexts/AuthContext";
+
 
 export async function POST(request: Request) {
     try {
@@ -33,10 +35,9 @@ export async function POST(request: Request) {
         // Set the session token in an HTTP-only cookie
         const response = NextResponse.json({ status: 200, message: 'User logged in successfully', nickName: userData.nickname });
         response.headers.set('Set-Cookie', `session-token=${sessionToken}; Path=/; HttpOnly; SameSite=Strict`);
-
         console.log("API Response NickName:", userData.nickname); // Debugging statement
 
-        return response;
+        return response ;
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

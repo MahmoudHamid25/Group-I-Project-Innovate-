@@ -223,7 +223,7 @@ form{
 .containerFormRegister{
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 3vh;
+    padding: 3.6vh;
     width: 40vh;
 }
 
@@ -459,7 +459,7 @@ td {
     padding: 10px;
     text-align: left;
     border: 2px solid #272A3D;
-    height: 17rem;
+    height: 2rem;
 }
 
 .feedback {
@@ -517,7 +517,6 @@ textarea {
     background-color: #555;
 }
 
-/*WIP since the whole page is component*/
 
 .uploadContainer {
     display: flex;

@@ -4,12 +4,15 @@ import React, { useState } from 'react';
 import { useAuth } from '@/app/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { userSession } from '@/app/contexts/AuthContext';
+import {user} from "@nextui-org/theme";
 
 interface Errors {
     email?: string;
     password?: string;
     form?: string;
 }
+
 
 function LoginForm() {
     const { login } = useAuth();
@@ -33,7 +36,6 @@ function LoginForm() {
 
             const data = await response.json();
             console.log("Login API Response Data:", data); // Debugging statement
-
             if (!response.ok) {
                 throw new Error(data.error || `Server responded with status ${response.status}`);
             }
@@ -43,7 +45,7 @@ function LoginForm() {
                 setErrorMessage('');
                 console.log("Login Page NickName:", data.nickName); // Debugging statement
                 login(data.nickName); // Update the context with the user's nickName
-                router.push('/');
+                router.push('/main/');
             } else {
                 setErrorMessage(data.error || 'An error occurred');
                 setSuccessMessage('');
