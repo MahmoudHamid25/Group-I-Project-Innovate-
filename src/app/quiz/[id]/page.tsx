@@ -1,4 +1,5 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 
 interface Answer {
     id: number;
@@ -34,9 +35,42 @@ const fetchQuizData = async (id: string) => {
     return response.json();
 };
 
-const QuizPage: React.FC<QuizProps> = async ({ params }) => {
+const QuizPage: React.FC<QuizProps> = ({ params }) => {
     const { id } = params;
-    const data = await fetchQuizData(id);
+    const [data, setData] = useState<{quizName: string, questions: Question[]}>({quizName: '', questions: []});
+    const [answers, setAnswers] = useState<{[key: number]: number}>({});
+    const [score, setScore] = useState<number | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const quizData = await fetchQuizData(id);
+                setData(quizData);
+            } catch (error) {
+                console.error('Error fetching quiz data:', error);
+            }
+        };
+        fetchData();
+    }, [id]);
+
+    const handleAnswerChange = (questionId: number, answerId: number) => {
+        setAnswers(prevAnswers => ({
+            ...prevAnswers,
+            [questionId]: answerId,
+        }));
+    };
+
+    const handleSubmit = () => {
+        let correctAnswers = 0;
+        data.questions.forEach((question) => {
+            const selectedAnswerId = answers[question.id];
+            const selectedAnswer = question.answers.find(answer => answer.id === selectedAnswerId);
+            if (selectedAnswer && selectedAnswer.is_correct) {
+                correctAnswers++;
+            }
+        });
+        setScore(correctAnswers);
+    };
 
     return (
         <div className="quiz-page-container">
@@ -48,13 +82,24 @@ const QuizPage: React.FC<QuizProps> = async ({ params }) => {
                         <ul>
                             {question.answers.map((answer) => (
                                 <li key={answer.id}>
-                                    {answer.answer_text} {answer.is_correct ? '(Correct)' : ''}
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name={`question-${question.id}`}
+                                            value={answer.id}
+                                            checked={answers[question.id] === answer.id}
+                                            onChange={() => handleAnswerChange(question.id, answer.id)}
+                                        />
+                                        {answer.answer_text}
+                                    </label>
                                 </li>
                             ))}
                         </ul>
                     </li>
                 ))}
             </ul>
+            <button onClick={handleSubmit}>Submit</button>
+            {score !== null && <p>Your score: {score} / {data.questions.length}</p>}
         </div>
     );
 };

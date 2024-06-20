@@ -22,10 +22,14 @@ load_dotenv()
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
-CORS(app, resources={r"/generate_quiz": {"origins": "http://localhost:3000"}})
-CORS(app, supports_credentials=True, resources={r"/quizzes": {"origins": "http://localhost:3000"}})
 
+# CORS configuration
+cors = CORS(app, resources={
+    r"/*": {
+        "origins": "http://localhost:3000",
+        "supports_credentials": True
+    }
+})
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'txt', 'pdf', 'docx', 'md'}
@@ -227,7 +231,6 @@ def get_quizzes():
     finally:
         if conn:
             conn.close()  # Ensure the connection is closed after completing the query
-
 
 @app.route('/update_quiz_title', methods=['POST'])
 def update_quiz_title():
