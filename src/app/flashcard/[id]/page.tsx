@@ -97,6 +97,7 @@ const FlashcardsPage: React.FC<QuizProps> = ({ params }) => {
                     </div>
                 ))}
             </div>
+            <a href={`/quiz/${id}`} className="back-to-quiz-button">Go back to the quiz</a>
         </div>
     );
 };

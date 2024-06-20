@@ -40,6 +40,7 @@ const QuizPage: React.FC<QuizProps> = ({ params }) => {
     const [data, setData] = useState<{quizName: string, questions: Question[]}>({quizName: '', questions: []});
     const [answers, setAnswers] = useState<{[key: number]: number}>({});
     const [score, setScore] = useState<number | null>(null);
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +71,11 @@ const QuizPage: React.FC<QuizProps> = ({ params }) => {
             }
         });
         setScore(correctAnswers);
+        setShowPopup(true);
+    };
+
+    const handlePracticeFlashcards = () => {
+        window.location.href = `/flashcard/${id}`;
     };
 
     return (
@@ -99,7 +105,17 @@ const QuizPage: React.FC<QuizProps> = ({ params }) => {
                 ))}
             </ul>
             <button onClick={handleSubmit}>Submit</button>
-            {score !== null && <p>Your score: {score} / {data.questions.length}</p>}
+            {score !== null && (
+                <div className={`popup_new_quiz_submit ${showPopup ? 'visible' : ''}`}>
+                    <div className="popup_new_quiz_submit_content">
+                        <h2>Quiz Results</h2>
+                        <p>You got {score} out of {data.questions.length} correct.</p>
+                        <p>You got {data.questions.length - score} wrong.</p>
+                        <button onClick={handlePracticeFlashcards}>Practice with Flashcards</button>
+                        <button onClick={() => setShowPopup(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
