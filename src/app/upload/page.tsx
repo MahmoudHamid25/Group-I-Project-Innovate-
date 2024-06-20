@@ -97,15 +97,15 @@ const QuizGenerator: React.FC = () => {
                 </div>
             </div>
             {overlayVisible && (
-                <div className="overlay" onClick={togglePopup}>
-                    <div className="popup" onClick={(e) => e.stopPropagation()}>
+                <div className="quiz-upload-popup-overlay" onClick={togglePopup}>
+                    <div className="quiz-upload-popup-box" onClick={(e) => e.stopPropagation()}>
                         <h3>Enter a name for your quiz</h3>
                         <input type="text" name="quizName" value={quizName} onChange={(e) => setQuizName(e.target.value)} placeholder="Quiz Name" />
                         <button onClick={togglePopup}>Cancel</button>
                         <button onClick={saveQuiz}>Save Quiz</button>
                     </div>
                 </div>
-            )}
+        )}
             {errorMessage && (
                 <div className="error-popup">
                     <div className="error-popup-content">

@@ -8,7 +8,7 @@
     --secondary-color: #434867;
     --accent-color: #B4CDED;
     --text-color: white;
-    --link-color: #007bff;
+    --link-color: #272A3D;
     --border-radius: 15px;
     --border-radius-small: 4px;
     --font-size-large: 46px;
@@ -910,7 +910,7 @@ textarea {
 }
 
 button {
-    background-color: #007bff;
+    background-color: #272A3D;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -966,7 +966,7 @@ button:hover {
 .position {
     font-size: 24px;
     font-weight: bold;
-    color: #007bff;
+    color: #272A3D;
 }
 
 .name {
@@ -980,5 +980,99 @@ button:hover {
     color: #28a745;
 }
 
+/* Styles for the upload container */
+
+/* Styles for the overlay */
+.quiz-upload-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for the popup */
+.quiz-upload-popup-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.quiz-upload-popup-box h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.quiz-upload-popup-box input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.quiz-upload-popup-box button {
+    background-color: #272A3D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.quiz-upload-popup-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for the error and success popups */
+.quiz-upload-popup-error, .quiz-upload-popup-success {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+}
+
+.quiz-upload-popup-error-content, .quiz-upload-popup-success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-upload-popup-error-content p, .quiz-upload-popup-success-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.quiz-upload-popup-error-content button, .quiz-upload-popup-success-content button {
+    background-color: #272A3D;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quiz-upload-popup-error-content button:hover, .quiz-upload-popup-success-content button:hover {
+    background-color: #272A3D;
+}
 
 
