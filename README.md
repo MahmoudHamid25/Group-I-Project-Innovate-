@@ -4,8 +4,8 @@ This is a [Next.js](https://nextjs.org/) and Python project bootstrapped with [`
 First you need Next.js and Node.js ( since sometimes the Next.js's node.js library does not work)
 
 Node.js needs their path to be manually set.
-After that install python3
-Open VSC or Webstorm
+After that install python3 with the Flask library
+Open VSC or Webstorm.
 Let the npm install the packages provided by the project.
 Then install python packages to make the python side of the project work.
 ```bash
